@@ -1,4 +1,4 @@
-![alt tag](https://github.com/1N3/BlackWidow/blob/master/blackwidowlogo.png)
+<center>![alt tag](https://github.com/1N3/BlackWidow/blob/master/blackwidowlogo.png)</center>
 
 ## ABOUT:
 BlackWidow is a python based web application spider to gather subdomains, URL's, dynamic parameters, email addresses and phone numbers from a target website.
