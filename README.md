@@ -35,7 +35,7 @@ injectx.py https://test.com/uers.php?user=1&admin=true - Fuzz all GET parameters
 ![alt tag](https://github.com/1N3/BlackWidow/blob/master/blackwidow-report1.png)
 
 ## LICENSE:
-This software is free to distribute, modify and use with the condition that credit is provided to the creator (1N3@CrowdShield) and is not for commercial use.
+This software is released under the GNU General Public License v3.0. See LICENSE.md for details.
 
 ## DONATIONS:
 Donations are welcome. This will help fascilitate improved features, frequent updates and better overall support.
