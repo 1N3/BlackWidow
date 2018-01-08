@@ -1,7 +1,7 @@
 ![alt tag](https://github.com/1N3/BlackWidow/blob/master/blackwidowlogo.png)
 
 ## ABOUT:
-BlackWidow is a python based web application spider to gather subdomains, URL's, dynamic parameters, email addresses and phone numbers from a target website.
+BlackWidow is a python based web application spider to gather subdomains, URL's, dynamic parameters, email addresses and phone numbers from a target website. This project also includes Inject-X fuzzer to scan dynamic URL's for common OWASP vulnerabilities.
 
 ## DEMO VIDEO:
 [![BlackWidow Demo](https://i.ytimg.com/vi/mch8ht47taY/hqdefault.jpg)](https://www.youtube.com/watch?v=mch8ht47taY)
@@ -13,17 +13,22 @@ BlackWidow is a python based web application spider to gather subdomains, URL's,
 - [x] Automatically collect all phone numbers from a target website
 - [x] Automatically collect all email addresses from a target website
 - [x] Automatically collect all form URL's from a target website
+- [X] Automatically scan/fuzz for common OWASP TOP vulnerabilities
 - [x] Automatically saves all data into sorted text files
 
 ## LINUX INSTALL:
 ```
 cp blackwidow /usr/bin/blackwidow
+cp injectx.py /usr/bin/injectx.py
+pip install -r requirements.txt
 ```
 
 ## USAGE:
 ```
 blackwidow -u https://target.com - crawl target.com with 3 levels of depth.
 blackwidow -d target.com -l 5 - crawl the domain: target.com with 5 levels of depth.
+blackwidow -d target.com -l 5 -s y - crawl the domain: target.com with 5 levels of depth and fuzz all unique parameters for OWASP vulnerabilities.
+injectx.py https://test.com/uers.php?user=1&admin=true - Fuzz all GET parameters for common OWASP vulnerabilities.
 ```
 
 ## SAMPLE REPORT:

@@ -7,7 +7,7 @@
 #
 # USAGE:
 # blackwidow -u https://target.com -l 2 <- spider https://target.com with 2 levels of depth (Default depth is 3). 
-# blackwidow -d target.com -l 5 -s y <- spider domain: target.com with 5 levels of depth and scan all dynamic URL's.
+# blackwidow -d target.com -l 5 -s y <- spider domain: target.com with 5 levels of depth and fuzz all dynamic URL's.
 #
 
 from bs4 import BeautifulSoup
@@ -243,8 +243,7 @@ def exit_handler():
   donations()
 
   if scan == "y":
-    print OKRED "[i] The scan feature is not currently available. Check back later for updates."
-    #os.system('for a in `cat ' + save_dir + domain + '-dynamic-unique.txt`; do python injectx.py $a; done;')
+    os.system('for a in `cat ' + save_dir + domain + '-dynamic-unique.txt`; do injectx.py $a; done;')
   else:
     pass
 

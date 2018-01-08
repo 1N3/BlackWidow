@@ -1,0 +1,5 @@
+requests
+coloredlogs
+beautifulsoup4
+requests
+lxml
