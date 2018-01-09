@@ -34,6 +34,15 @@ injectx.py https://test.com/uers.php?user=1&admin=true - Fuzz all GET parameters
 ## SAMPLE REPORT:
 ![alt tag](https://github.com/1N3/BlackWidow/blob/master/blackwidow-report1.png)
 
+## DOCKER:
+```bash
+git clone https://github.com/1N3/BlackWidow.git
+cd BlackWidow
+docker build -t BlackWidow .
+docker run -it BlackWidow # Defaults to --help
+
+```
+
 ## LICENSE:
 This software is released under the GNU General Public License v3.0. See LICENSE.md for details.
 
