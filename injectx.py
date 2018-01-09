@@ -19,7 +19,7 @@ def logo():
     print OKORANGE + '  /___/_/ /_/_/ /\___/\___/\__/_/|_|  ' + RESET
     print OKORANGE + '         /_____/                     ' + RESET
     print ''
-    print OKBLUE +   '--== Inject-X Fuzzer by 1N3@CrowdShield ==-- ' + RESET 
+    print OKBLUE +   '--== Inject-X Fuzzer by 1N3@CrowdShield ==-- ' + RESET
     print OKBLUE +   '   --== https://crowdshield.com ==-- ' + RESET
     print ''
 
@@ -120,7 +120,7 @@ def active_scan():
                 xss_url2 = new_url.replace("INJECTX", payload_exploit2)
                 print OKRED + "[+] XSS Found! ", str(payload_exploit2) + RESET
                 print OKRED + "[+] Vulnerable URL: " + xss_url2 + RESET
-                print OKGREEN + "[c] Exloit Command: firefox '" + xss_url2 + "' & "
+                print OKGREEN + "[c] Exploit Command: firefox '" + xss_url2 + "' & "
                 #os.system("curl -s '" + xss_url2 + "' | egrep alert\(1\) --color=auto")
                 #os.system("firefox '" + xss_url2 + "' > /dev/null 2> /dev/null")
             else:
@@ -391,7 +391,7 @@ def active_scan():
             idor_length_list.append(http_length)
             http_length_diff = str(http_length_base - http_length)
             print COLOR2 + "[i] New URL: " + idor_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET
-            
+
             if (idor_length_list[0] != idor_length_list[1]) or (idor_status_list[1] != idor_status_list[2]) or (idor_length_list[0] != idor_length_list[2]):
                 print OKRED + "[+] Possible IDOR Found! " + RESET
                 print OKRED + "[+] Vulnerable URL: " + idor_url + RESET
@@ -597,10 +597,10 @@ print COLOR3 + ">>> " + OKORANGE + full_url + COLOR2 + " [" + OKRED + str(http_s
 print COLOR3 + "======================================================================================================" + RESET
 
 if str(http_status_base) == "404":
-    print COLOR1 + "[F] Recieved HTTP Status 404 - Page Not Found. Skipping..." + RESET
+    print COLOR1 + "[F] Received HTTP Status 404 - Page Not Found. Skipping..." + RESET
 
 elif str(http_status_base) == "403":
-    print COLOR1 + "[F] Recieved HTTP Status 403 - Page Not Found. Skipping..." + RESET
+    print COLOR1 + "[F] Received HTTP Status 403 - Page Not Found. Skipping..." + RESET
 
 else:
     if "=" in full_url:
@@ -614,7 +614,7 @@ else:
                 param_list.extend([str(x + "=")])
                 param_vals.extend([str(urllib.quote_plus(y))])
                 param_length = param_length + 1
-                
+
             # FIND BASE URL
             dynamic_url = full_url.find("?")
             base_url = str(full_url[:dynamic_url + 1])
@@ -622,7 +622,7 @@ else:
             # LIST EACH PARAMETER
             active_fuzz = 1
             i = 1
-            
+
             while i <= param_length and active_fuzz <= param_length:
                 # DETERMINE FUZZ PARAMETER SELECTED
                 # IF CURRENT POSITION IS THE ACTIVE FUZZ POSITION

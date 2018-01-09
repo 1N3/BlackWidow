@@ -47,7 +47,7 @@ docker run -it BlackWidow # Defaults to --help
 This software is released under the GNU General Public License v3.0. See LICENSE.md for details.
 
 ## DONATIONS:
-Donations are welcome. This will help fascilitate improved features, frequent updates and better overall support.
+Donations are welcome. This will help facilitate improved features, frequent updates and better overall support.
 - [+] BTC 1Fav36btfmdrYpCAR65XjKHhxuJJwFyKum
 - [+] ETH 0x20bB09273702eaBDFbEE9809473Fd04b969a794d
 - [+] LTC LQ6mPewec3xeLBYMdRP4yzeta6b9urqs2f
