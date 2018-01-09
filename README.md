@@ -39,8 +39,8 @@ This software is released under the GNU General Public License v3.0. See LICENSE
 
 ## DONATIONS:
 Donations are welcome. This will help fascilitate improved features, frequent updates and better overall support.
-- [+] BTC 1Fav36btfmdrYpCAR65XjKHhxuJJwFyKum"
-- [+] ETH 0x20bB09273702eaBDFbEE9809473Fd04b969a794d"
-- [+] LTC LQ6mPewec3xeLBYMdRP4yzeta6b9urqs2f"
-- [+] XMR 4JUdGzvrMFDWrUUwY3toJATSeNwjn54LkCnKBPRzDuhzi5vSepHfUckJNxRL2gjkNrSqtCoRUrEDAgRwsQvVCjZbS3EN24xprAQ1Z5Sy5s"
-- [+] ZCASH t1fsizsk2cqqJAjRoUmXJSyoVa9utYucXt7"
+- [+] BTC 1Fav36btfmdrYpCAR65XjKHhxuJJwFyKum
+- [+] ETH 0x20bB09273702eaBDFbEE9809473Fd04b969a794d
+- [+] LTC LQ6mPewec3xeLBYMdRP4yzeta6b9urqs2f
+- [+] XMR 4JUdGzvrMFDWrUUwY3toJATSeNwjn54LkCnKBPRzDuhzi5vSepHfUckJNxRL2gjkNrSqtCoRUrEDAgRwsQvVCjZbS3EN24xprAQ1Z5Sy5s
+- [+] ZCASH t1fsizsk2cqqJAjRoUmXJSyoVa9utYucXt7
