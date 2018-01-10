@@ -392,7 +392,7 @@ def active_scan():
             http_length_diff = str(http_length_base - http_length)
             print COLOR2 + "[i] New URL: " + idor_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET
 
-            if (idor_length_list[0] != idor_length_list[1]) or (idor_status_list[1] != idor_status_list[2]) or (idor_length_list[0] != idor_length_list[2]):
+            if (idor_length_list[0] != idor_length_list[1]) or (idor_length_list[1] != idor_length_list[2]) or (idor_length_list[0] != idor_length_list[2]):
                 print OKRED + "[+] Possible IDOR Found! " + RESET
                 print OKRED + "[+] Vulnerable URL: " + idor_url + RESET
                 print OKGREEN + "[c] Exploit Command: curl -s '" + idor_url + "'"
