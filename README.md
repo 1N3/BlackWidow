@@ -27,6 +27,7 @@ pip install -r requirements.txt
 ```
 blackwidow -u https://target.com - crawl target.com with 3 levels of depth.
 blackwidow -d target.com -l 5 - crawl the domain: target.com with 5 levels of depth.
+blackwidow -d target.com -l 5 -c 'test=test' - crawl the domain: target.com with 5 levels of depth using the cookie 'test=test'
 blackwidow -d target.com -l 5 -s y - crawl the domain: target.com with 5 levels of depth and fuzz all unique parameters for OWASP vulnerabilities.
 injectx.py https://test.com/uers.php?user=1&admin=true - Fuzz all GET parameters for common OWASP vulnerabilities.
 ```
