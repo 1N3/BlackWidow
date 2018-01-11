@@ -18,7 +18,7 @@ BlackWidow is a python based web application spider to gather subdomains, URL's,
 
 ## LINUX INSTALL:
 ```
-cp blackwidow /usr/bin/blackwidow
+cp blackwidow /usr/bin/blackwidow 
 cp injectx.py /usr/bin/injectx.py
 pip install -r requirements.txt
 ```
