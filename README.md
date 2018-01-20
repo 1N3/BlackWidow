@@ -56,8 +56,8 @@ Donations are welcome. This will help facilitate improved features, frequent upd
 - [+] ZCASH t1fsizsk2cqqJAjRoUmXJSyoVa9utYucXt7
 
 ## SOCIAL MEDIA:
-[Twitter](https://www.twitter.com/crowdshield "Twitter")
-[YouTube](https://www.yahoo.com/crowdshield "YouTube")
-[Blog](https://crowdshield.com/blog.php "Blog")
-[BugCrowd](https://bugcrowd.com/1N3 "BugCrowd")
-[HackerOne](https://hackerone.com/1N3 "HackerOne")
+- [Twitter](https://www.twitter.com/crowdshield "Twitter")
+- [YouTube](https://www.yahoo.com/crowdshield "YouTube")
+- [Blog](https://crowdshield.com/blog.php "Blog")
+- [BugCrowd](https://bugcrowd.com/1N3 "BugCrowd")
+- [HackerOne](https://hackerone.com/1N3 "HackerOne")
