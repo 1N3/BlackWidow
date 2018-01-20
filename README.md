@@ -1,4 +1,5 @@
 ![alt tag](https://github.com/1N3/BlackWidow/blob/master/blackwidowlogo.png)
+[![Twitter](https://github.com/1N3/BlackWidow/blob/master/blackwidowlogo.png)](https://twitter.com/intent/tweet?text=Black%20Widow:%20https://github.com/1N3/BlackWidow&url=https://github.com/1N3/BlackWidow)
 
 ## ABOUT:
 BlackWidow is a python based web application spider to gather subdomains, URL's, dynamic parameters, email addresses and phone numbers from a target website. This project also includes Inject-X fuzzer to scan dynamic URL's for common OWASP vulnerabilities.
