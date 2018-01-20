@@ -1,5 +1,4 @@
 ![alt tag](https://github.com/1N3/BlackWidow/blob/master/blackwidowlogo.png)
-[![Twitter](https://github.com/1N3/BlackWidow/blob/master/blackwidowlogo.png)](https://twitter.com/intent/tweet?text=Black%20Widow:%20https://github.com/1N3/BlackWidow&url=https://github.com/1N3/BlackWidow)
 
 ## ABOUT:
 BlackWidow is a python based web application spider to gather subdomains, URL's, dynamic parameters, email addresses and phone numbers from a target website. This project also includes Inject-X fuzzer to scan dynamic URL's for common OWASP vulnerabilities.
@@ -55,3 +54,10 @@ Donations are welcome. This will help facilitate improved features, frequent upd
 - [+] LTC LQ6mPewec3xeLBYMdRP4yzeta6b9urqs2f
 - [+] XMR 4JUdGzvrMFDWrUUwY3toJATSeNwjn54LkCnKBPRzDuhzi5vSepHfUckJNxRL2gjkNrSqtCoRUrEDAgRwsQvVCjZbS3EN24xprAQ1Z5Sy5s
 - [+] ZCASH t1fsizsk2cqqJAjRoUmXJSyoVa9utYucXt7
+
+## SOCIAL MEDIA:
+[Twitter](https://www.twitter.com/crowdshield "Twitter")
+[YouTube](https://www.yahoo.com/crowdshield "YouTube")
+[Blog](https://crowdshield.com/blog.php "Blog")
+[BugCrowd](https://bugcrowd.com/1N3 "BugCrowd")
+[HackerOne](https://hackerone.com/1N3 "HackerOne")
