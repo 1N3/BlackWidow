@@ -39,8 +39,8 @@ injectx.py https://test.com/uers.php?user=1&admin=true - Fuzz all GET parameters
 ```bash
 git clone https://github.com/1N3/BlackWidow.git
 cd BlackWidow
-docker build -t BlackWidow .
-docker run -it BlackWidow # Defaults to --help
+docker build -t blackwidow .
+docker run -it blackwidow # Defaults to --help
 
 ```
 
