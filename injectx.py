@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 from __future__ import print_function
-import urllib, urllib2, sys, urlparse, os
+import urllib, urllib2, sys, urlparse, os, ssl
 
 OKBLUE='\033[94m'
 OKRED='\033[91m'
@@ -588,7 +588,7 @@ logo()
 
 full_url = sys.argv[1]
 payload = "INJECTX"
-http_request_base = urllib.urlopen(full_url)
+http_request_base = urllib.urlopen(full_url, context=ssl._create_unverified_context())
 http_response_base = http_request_base.read()
 http_length_base = len(http_response_base)
 http_status_base = http_request_base.getcode()
