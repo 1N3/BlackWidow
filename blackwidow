@@ -1,5 +1,5 @@
 #!/usr/bin/python
-# blackwidow by 1N3 - Last Updated 20180118
+# blackwidow by 1N3 - Last Updated 20180617
 # https://crowdshield.com
 #
 
@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from urlparse import urlparse
 import requests, sys, os, atexit, optparse
 from Cookie import SimpleCookie
+requests.packages.urllib3.disable_warnings()
 
 OKBLUE='\033[94m'
 OKRED='\033[91m'
@@ -122,7 +123,7 @@ def readfile():
         print(ex)
 
 def logo():
-  version = "1.0"
+  version = "1.1"
   print OKRED + ""
   print OKRED + ""
   print OKRED + "                _.._"
