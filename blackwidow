@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # blackwidow by 1N3 - Last Updated 20180118
-# https://crowdshield.com 
+# https://crowdshield.com
 #
 
 from bs4 import BeautifulSoup
@@ -18,39 +18,40 @@ RESET='\x1b[0m'
 
 def readlinks (url):
   try:
-    
+
     if len(cookies) > 2:
       headers = {'Cookie': cookies}
-      r = requests.get(url, headers=headers)
+      r = requests.get(url, headers=headers, verify=False)
     else:
-      r  = requests.get(url)
-      
+      r  = requests.get(url, verify=False)
+
     data = r.text
     soup = BeautifulSoup(data, "lxml")
     parsed_uri = urlparse(url)
     domain = '{uri.netloc}'.format(uri=parsed_uri)
+    domain = domain.split(':')[0]
   except Exception as ex:
     print(ex)
 
-  urls = open("/tmp/" + domain + "-urls.txt","w+") 
-  urls_saved = open(save_dir + domain + "-urls.txt","a") 
-  forms_saved = open(save_dir + domain + "-forms.txt","a")
-  dynamic_saved = open(save_dir + domain + "-dynamic.txt","a") 
-  emails_saved = open(save_dir + domain + "-emails.txt","a")
-  phones_saved = open(save_dir + domain + "-phones.txt","a")
-  subdomains_saved = open(save_dir + domain + "-subdomains.txt","a")
+  urls = open("/tmp/" + domain + "_" + port + "-urls.txt","w+")
+  urls_saved = open(save_dir + domain + "_" + port + "-urls.txt","a")
+  forms_saved = open(save_dir + domain + "_" + port + "-forms.txt","a")
+  dynamic_saved = open(save_dir + domain + "_" + port + "-dynamic.txt","a")
+  emails_saved = open(save_dir + domain + "_" + port + "-emails.txt","a")
+  phones_saved = open(save_dir + domain + "_" + port + "-phones.txt","a")
+  subdomains_saved = open(save_dir + domain + "_" + port + "-subdomains.txt","a")
 
   print ""
   print OKGREEN + "==================================================================================================" + RESET
-  print OKGREEN + url 
+  print OKGREEN + url
   print OKGREEN + "==================================================================================================" + RESET
   for form in soup.find_all('form'):
-    print OKBLUE + "[+] Extracting form values..." 
+    print OKBLUE + "[+] Extracting form values..."
     print "__________________________________________________________________________________________________" + OKORANGE
     print form
     print OKBLUE + "__________________________________________________________________________________________________"
     print RESET
-    forms_saved.write(url + "\n") 
+    forms_saved.write(url + "\n")
 
   # PARSE LINKS
   for link in soup.find_all('a'):
@@ -59,7 +60,7 @@ def readlinks (url):
       parsed_uri = urlparse(link.get('href'))
       linkdomain = '{uri.netloc}'.format(uri=parsed_uri)
       if (domain != linkdomain) and (linkdomain != "") and (domain in linkdomain):
-        print COLOR1 + "[+] Sub-domain found! " + linkdomain + " " + RESET 
+        print COLOR1 + "[+] Sub-domain found! " + linkdomain + " " + RESET
         subdomains_saved.write(linkdomain + "\n")
       # IF LINK STARTS WITH HTTP
       if link.get('href')[:4] == "http":
@@ -67,51 +68,51 @@ def readlinks (url):
         if domain in link.get('href'):
           # IF URL IS DYNAMIC
           if "?" in link.get('href'):
-            print OKRED + "[+] Dynamic URL found! " + link.get('href') + " " + RESET 
-            urls.write(link.get('href') + "\n") 
-            urls_saved.write(link.get('href') + "\n") 
-            dynamic_saved.write(link.get('href') + "\n") 
+            print OKRED + "[+] Dynamic URL found! " + link.get('href') + " " + RESET
+            urls.write(link.get('href') + "\n")
+            urls_saved.write(link.get('href') + "\n")
+            dynamic_saved.write(link.get('href') + "\n")
           else:
             print link.get('href')
-            urls.write(link.get('href') + "\n") 
-            urls_saved.write(link.get('href') + "\n") 
+            urls.write(link.get('href') + "\n")
+            urls_saved.write(link.get('href') + "\n")
         # EXTERNAL LINK FOUND
         else:
           # IF URL IS DYNAMIC
           if "?" in link.get('href'):
-            print COLOR2 + "[+] External Dynamic URL found! " + link.get('href') + " " + RESET 
+            print COLOR2 + "[+] External Dynamic URL found! " + link.get('href') + " " + RESET
           else:
             print COLOR2 + "[i] External link found! " + link.get('href') + " " + RESET
       # IF URL IS DYNAMIC
       elif "?" in link.get('href'):
-        print OKRED + "[+] Dynamic URL found! " + url + link.get('href') + " " + RESET 
-        urls.write(url + "/" + link.get('href') + "\n") 
-        urls_saved.write(url + "/" + link.get('href') + "\n") 
-        dynamic_saved.write(url + "/" + link.get('href') + "\n")
+        print OKRED + "[+] Dynamic URL found! " + globalURL + "/" + link.get('href') + " " + RESET
+        urls.write(globalURL + "/" + link.get('href') + "\n")
+        urls_saved.write(globalURL + "/" + link.get('href') + "\n")
+        dynamic_saved.write(globalURL + "/" + link.get('href') + "\n")
       # DOM BASED LINK
       elif link.get('href')[:1] == "#":
-        print OKBLUE + "[i] DOM based link found! " + link.get('href') + " " + RESET 
+        print OKBLUE + "[i] DOM based link found! " + link.get('href') + " " + RESET
       # TELEPHONE
       elif link.get('href')[:4] == "tel:":
         s = link.get('href')
         phonenum = s.split(':')[1]
-        print OKORANGE + "[i] Telephone # found! " + phonenum + " " + RESET 
+        print OKORANGE + "[i] Telephone # found! " + phonenum + " " + RESET
         phones_saved.write(phonenum + "\n")
       # EMAIL
       elif link.get('href')[:7] == "mailto:":
         s = link.get('href')
         email = s.split(':')[1]
-        print OKORANGE + "[i] Email found! " + email + " " + RESET 
+        print OKORANGE + "[i] Email found! " + email + " " + RESET
         emails_saved.write(email + "\n")
       # ELSE NORMAL LINK FOUND
       else:
         print url + "/" + link.get('href')
-        urls.write(url + "/" + link.get('href') + "\n") 
-        urls_saved.write(url + "/" + link.get('href') + "\n") 
+        urls.write(url + "/" + link.get('href') + "\n")
+        urls_saved.write(url + "/" + link.get('href') + "\n")
   print OKGREEN + "__________________________________________________________________________________________________" + RESET
 
 def readfile():
-  filename = "/tmp/" + domain + "-urls.txt"
+  filename = "/tmp/" + domain + "_" + port + "-urls.txt"
   with open(filename) as f:
     urls = f.read().splitlines()
     for url in urls:
@@ -134,7 +135,7 @@ def logo():
   print OKRED + "     1N3   /  /` '' `\  \ "
   print OKRED + "             |        |"
   print OKRED + "              \      /"
-  print OKRED + "" 
+  print OKRED + ""
   print RESET
   print OKORANGE + " + -- --=[https://crowdshield.com" + RESET
   print OKORANGE + " + -- --=[blackwidow v" + version + RESET
@@ -159,67 +160,68 @@ def donations():
 
 
 def exit_handler():
-  os.system('sort -u ' + save_dir + "*" + '-urls.txt > ' + save_dir + domain + '-urls-sorted.txt 2>/dev/null')
-  os.system('sort -u ' + save_dir + "*" + '-forms.txt > ' + save_dir + domain + '-forms-sorted.txt 2>/dev/null')
-  os.system('sort -u ' + save_dir + "*" + '-dynamic.txt > ' + save_dir + domain + '-dynamic-sorted.txt 2>/dev/null')
-  os.system('rm -f ' + save_dir + "*" + '-dynamic-unique.txt 2>/dev/null')
-  os.system('touch ' + save_dir + domain + '-dynamic-unique.txt')
-  os.system('for a in `cat ' + save_dir + domain + '-dynamic-sorted.txt | cut -d \'?\' -f2 | sort -u | cut -d \'=\' -f1 | sort -u`; do for b in `egrep $a ' + save_dir + domain + '-dynamic.txt -m 1`; do echo $b >> ' + save_dir + domain + '-dynamic-unique.txt; done; done;')
-  os.system('sort -u ' + save_dir + "*" + '-subdomains.txt > ' + save_dir + domain + '-subdomains-sorted.txt 2>/dev/null')
-  os.system('sort -u ' + save_dir + "*" + '-emails.txt > ' + save_dir + domain + '-emails-sorted.txt 2>/dev/null')
-  os.system('sort -u ' + save_dir + "*" + '-phones.txt > ' + save_dir + domain + '-phones-sorted.txt 2>/dev/null')
+  os.system('sort -u ' + save_dir + domain + "_" + port + '-urls.txt > ' + save_dir + domain + "_" + port + '-urls-sorted.txt 2>/dev/null')
+  os.system('sort -u ' + save_dir + domain + "_" + port + '-forms.txt > ' + save_dir + domain + "_" + port + '-forms-sorted.txt 2>/dev/null')
+  os.system('sort -u ' + save_dir + domain + "_" + port + '-dynamic.txt > ' + save_dir + domain + "_" + port + '-dynamic-sorted.txt 2>/dev/null')
+  os.system('rm -f ' + save_dir + domain + "_" + port + '-dynamic-unique.txt 2>/dev/null')
+  os.system('touch ' + save_dir + domain + "_" + port + '-dynamic-unique.txt')
+  os.system('for a in `cat ' + save_dir + domain + "_" + port + '-dynamic-sorted.txt | cut -d \'?\' -f2 | sort -u | cut -d \'=\' -f1 | sort -u`; do for b in `egrep $a ' + save_dir + domain + "_" + port +'-dynamic.txt -m 1`; do echo $b >> ' + save_dir + domain + "_" + port + '-dynamic-unique.txt; done; done;')
+  os.system('sort -u ' + save_dir + domain + "_" + port + '-subdomains.txt > ' + save_dir + domain + "_" + port + '-subdomains-sorted.txt 2>/dev/null')
+  os.system('sort -u ' + save_dir + domain + "_" + port + '-emails.txt > ' + save_dir + domain + "_" + port + '-emails-sorted.txt 2>/dev/null')
+  os.system('sort -u ' + save_dir + domain + "_" + port + '-phones.txt > ' + save_dir + domain + "_" + port + '-phones-sorted.txt 2>/dev/null')
 
   logo()
-  print OKGREEN + "[+] URL's Discovered: \n" + save_dir + domain + "-urls-sorted.txt" + RESET
+  print OKGREEN + "[+] URL's Discovered: \n" + save_dir + domain + "_" + port + "-urls-sorted.txt" + RESET
   print OKGREEN + "__________________________________________________________________________________________________" + RESET
-  os.system('cat ' + save_dir + domain + '-urls-sorted.txt')
+  os.system('cat ' + save_dir + domain + "_" + port + '-urls-sorted.txt')
   print RESET
-  print OKGREEN + "[+] Dynamic URL's Discovered: \n" + save_dir + domain + "-dynamic-sorted.txt" + RESET
+  print OKGREEN + "[+] Dynamic URL's Discovered: \n" + save_dir + domain + "_" + port + "-dynamic-sorted.txt" + RESET
   print OKGREEN + "__________________________________________________________________________________________________" + RESET
-  os.system('cat ' + save_dir + domain + '-dynamic-sorted.txt')
+  os.system('cat ' + save_dir + domain + "_" + port + '-dynamic-sorted.txt')
   print RESET
-  print OKGREEN + "[+] Form URL's Discovered: \n" + save_dir + domain + "-forms-sorted.txt" + RESET
+  print OKGREEN + "[+] Form URL's Discovered: \n" + save_dir + domain + "_" + port + "-forms-sorted.txt" + RESET
   print OKGREEN + "__________________________________________________________________________________________________" + RESET
-  os.system('cat ' + save_dir + domain + '-forms-sorted.txt')
+  os.system('cat ' + save_dir + domain + "_" + port + '-forms-sorted.txt')
   print RESET
-  print OKGREEN + "[+] Unique Dynamic Parameters Discovered: \n" + save_dir + domain + "-dynamic-unique.txt" + RESET
+  print OKGREEN + "[+] Unique Dynamic Parameters Discovered: \n" + save_dir + domain + "_" + port + "-dynamic-unique.txt" + RESET
   print OKGREEN + "__________________________________________________________________________________________________" + RESET
-  os.system('cat ' + save_dir + domain + '-dynamic-unique.txt')
+  os.system('cat ' + save_dir + domain + "_" + port + '-dynamic-unique.txt')
   print RESET
-  print OKGREEN + "[+] Sub-domains Discovered: \n" + save_dir + domain + "-subdomains-sorted.txt" + RESET
+  print OKGREEN + "[+] Sub-domains Discovered: \n" + save_dir + domain + "_" + port + "-subdomains-sorted.txt" + RESET
   print OKGREEN + "__________________________________________________________________________________________________" + RESET
-  os.system('cat ' + save_dir + domain + '-subdomains-sorted.txt')
+  os.system('cat ' + save_dir + domain + "_" + port + '-subdomains-sorted.txt')
   print RESET
-  print OKGREEN + "[+] Emails Discovered: \n" + save_dir + domain + "-emails-sorted.txt" + RESET
+  print OKGREEN + "[+] Emails Discovered: \n" + save_dir + domain + "_" + port + "-emails-sorted.txt" + RESET
   print OKGREEN + "__________________________________________________________________________________________________" + RESET
-  os.system('cat ' + save_dir + domain + '-emails-sorted.txt')
+  os.system('cat ' + save_dir + domain + "_" + port + '-emails-sorted.txt')
   print RESET
-  print OKGREEN + "[+] Phones Discovered: \n" + save_dir + domain + "-phones-sorted.txt" + RESET
+  print OKGREEN + "[+] Phones Discovered: \n" + save_dir + domain + "_" + port + "-phones-sorted.txt" + RESET
   print OKGREEN + "__________________________________________________________________________________________________" + RESET
-  os.system('cat ' + save_dir + domain + '-phones-sorted.txt')
+  os.system('cat ' + save_dir + domain + "_" + port + '-phones-sorted.txt')
   print RESET
   print OKRED + "[+] Loot Saved To: \n" + save_dir + RESET
   print OKRED + "__________________________________________________________________________________________________" + RESET
   print RESET
 
-  os.system('rm -f ' + save_dir + domain + '-dynamic.txt')
-  os.system('rm -f ' + save_dir + domain + '-forms.txt')
-  os.system('rm -f ' + save_dir + domain + '-emails.txt')
-  os.system('rm -f ' + save_dir + domain + '-phones.txt')
-  os.system('rm -f ' + save_dir + domain + '-urls.txt')
-  os.system('rm -f ' + save_dir + domain + '-subdomains.txt')
-  os.system('rm -f /tmp/' + domain + '-urls.txt 2> /dev/null')
+  os.system('rm -f ' + save_dir + domain + "_" + port + '-dynamic.txt')
+  os.system('rm -f ' + save_dir + domain + "_" + port + '-forms.txt')
+  os.system('rm -f ' + save_dir + domain + "_" + port + '-emails.txt')
+  os.system('rm -f ' + save_dir + domain + "_" + port + '-phones.txt')
+  os.system('rm -f ' + save_dir + domain + "_" + port + '-urls.txt')
+  os.system('rm -f ' + save_dir + domain + "_" + port + '-subdomains.txt')
+  os.system('rm -f /tmp/' + domain + "_" + port + '-urls.txt 2> /dev/null')
 
   donations()
 
   if scan == "y":
-    os.system('for a in `cat ' + save_dir + domain + '-dynamic-unique.txt`; do injectx.py $a; done;')
+    os.system('for a in `cat ' + save_dir + domain + "_" + port + '-dynamic-unique.txt`; do python /usr/bin/injectx.py $a; done;')
   else:
     pass
 
 
 
 logo()
+globalURL = "globalBadness"
 if len(sys.argv) < 2:
   print "You need to specify a URL to scan. Use --help for all options."
   quit()
@@ -245,43 +247,69 @@ else:
       action="store", dest="scan",
       help="Scan all dynamic URL's found", default="n")
 
+  parser.add_option('-p', '--port',
+      action="store", dest="port",
+      help="Port for the URL", default="80")
+
   options, args = parser.parse_args()
   target = str(options.url)
   domain = str(options.domain)
   cookies = str(options.cookie)
   max_depth = str(options.level)
   scan = str(options.scan)
+  port = str(options.port)
   ans = scan
   level = 1
 
-  if (len(str(domain)) > 4):
-    target = "http://" + domain
-  else:
-    parsed_uri = urlparse(target)
-    domain = '{uri.netloc}'.format(uri=parsed_uri)
+  #using a domain and a port or a URL?
+  if ":" not in target:
 
-  save_dir = "/usr/share/blackwidow/" + domain + "/"
+    if (len(str(domain)) > 4):
+      target = "http://" + domain + ":" + port
+      print "target is: " + target
+    else:
+      parsed_uri = urlparse(target)
+      domain = '{uri.netloc}'.format(uri=parsed_uri)
+      print "domain after parsed_uri is now: " + domain
+
+    if (len(str(target)) > 6):
+      url = target + ":" + port #big change here
+      print "url is: " + url
+    else:
+      url = "http://" + str(domain) + ":" + port
+      print "url is: " + url
+  else:
+      url = target
+      globalURL = target
+      print "url is: " + url
+      parsed_uri = urlparse(target)
+      domainWithPort = '{uri.netloc}'.format(uri=parsed_uri)
+      domain = domainWithPort.split(':')[0]
+      print "domain after parsed_uri is now: " + domain
+      if (len(target.split(':')) > 2):
+        portWithPossiblePath = target.split(':')[2]
+        port = portWithPossiblePath.split('/')[0]
+        print "port is: " + port
+      else:
+        port = port
+        print "port is: " + port
+
+  save_dir = "/usr/share/blackwidow/" + domain + "_" + port + "/"
   os.system('mkdir -p ' + save_dir + ' 2>/dev/null')
-
-  if (len(str(target)) > 6):
-    url = target
-  else:
-    url = "http://" + str(domain)
-
   atexit.register(exit_handler)
 
 
   # FILE INIT
-  urls_file = "/tmp/" + domain + "-urls.txt"
-  urls_saved_file = save_dir + domain + "-urls.txt"
-  forms_saved_file = save_dir + domain + "-forms.txt"
-  subdomain_file = save_dir + domain + "-subdomains.txt"
-  emails_file = save_dir + domain + "-emails.txt"
-  phones_file = save_dir + domain + "-phones.txt"
+  urls_file = "/tmp/" + domain + "_" + port + "-urls.txt"
+  urls_saved_file = save_dir + domain + "_" + port + "-urls.txt"
+  forms_saved_file = save_dir + domain + "_" + port + "-forms.txt"
+  subdomain_file = save_dir + domain + "_" + port + "-subdomains.txt"
+  emails_file = save_dir + domain + "_" + port + "-emails.txt"
+  phones_file = save_dir + domain + "_" + port + "-phones.txt"
   urls = open(urls_file,"w+")
   urls.close()
   urls_saved = open(urls_saved_file,"w+")
-  urls_saved.close() 
+  urls_saved.close()
   forms_saved = open(forms_saved_file,"w+")
   forms_saved.close()
   subdomains = open(subdomain_file,"w+")
