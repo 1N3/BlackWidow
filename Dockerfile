@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:latest
 
 
 RUN apk --update add --no-cache python2 py2-requests py2-pip py2-lxml py2-requests openssl ca-certificates
