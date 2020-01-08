@@ -247,10 +247,17 @@ else:
   ans = scan
   level = 1
 
-  #using a domain and a port or a URL?
+  # using a domain and a port or a URL?
   if ":" not in target:
 
-    if (len(str(domain)) > 4):
+    if len(str(target)) > 6:
+      url = target + ":" + port #big change here
+      #print "url is: " + url
+    else:
+      url = "http://" + str(domain) + ":" + port
+      #print "url is: " + url
+
+    if len(str(domain)) > 4:
       target = "http://" + domain + ":" + port
       #print "target is: " + target
     else:
@@ -258,12 +265,6 @@ else:
       domain = '{uri.netloc}'.format(uri=parsed_uri)
       #print "domain after parsed_uri is now: " + domain
 
-    if (len(str(target)) > 6):
-      url = target + ":" + port #big change here
-      #print "url is: " + url
-    else:
-      url = "http://" + str(domain) + ":" + port
-      #print "url is: " + url
   else:
       url = target
       globalURL = target
