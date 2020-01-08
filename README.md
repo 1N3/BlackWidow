@@ -45,19 +45,12 @@ docker run -it blackwidow # Defaults to --help
 ```
 
 ## LICENSE:
-This software is released under the GNU General Public License v3.0. See LICENSE.md for details.
+You may modify and re-distribute this software as long as the project name "BlackWidow", credit to the author "xer0dayz" and website URL "https://xerosecurity.com" are NOT mofified. Doing so will break the license agreement and a takedown notice will be issued. 
 
-## DONATIONS:
-Donations are welcome. This will help facilitate improved features, frequent updates and better overall support.
-- [+] BTC 1Fav36btfmdrYpCAR65XjKHhxuJJwFyKum
-- [+] ETH 0x20bB09273702eaBDFbEE9809473Fd04b969a794d
-- [+] LTC LQ6mPewec3xeLBYMdRP4yzeta6b9urqs2f
-- [+] XMR 4JUdGzvrMFDWrUUwY3toJATSeNwjn54LkCnKBPRzDuhzi5vSepHfUckJNxRL2gjkNrSqtCoRUrEDAgRwsQvVCjZbS3EN24xprAQ1Z5Sy5s
-- [+] ZCASH t1fsizsk2cqqJAjRoUmXJSyoVa9utYucXt7
+## DISCLAIMER:
+This program is used for educational and ethical purposes only. I take no responsibility for any damages caused from using this program. By downloading and using this software, you agree that you take full responsibility for any damages and liability.
 
-## SOCIAL MEDIA:
-- [Twitter](https://www.twitter.com/crowdshield "Twitter")
-- [YouTube](https://www.yahoo.com/crowdshield "YouTube")
-- [Blog](https://crowdshield.com/blog.php "Blog")
-- [BugCrowd](https://bugcrowd.com/1N3 "BugCrowd")
-- [HackerOne](https://hackerone.com/1N3 "HackerOne")
+## LINKS:
+- [Twitter](https://www.twitter.com/xer0dayz "Personal Twitter")
+- [Twitter](https://www.twitter.com/xerosecurity "Company Twitter")
+- [Website](https://xerosecurity.com "XeroSecurity"

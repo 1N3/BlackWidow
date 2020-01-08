@@ -21,8 +21,8 @@ def logo():
     print(OKORANGE + '  /___/_/ /_/_/ /\___/\___/\__/_/|_|  ' + RESET)
     print(OKORANGE + '         /_____/                     ' + RESET)
     print('')
-    print(OKBLUE +   '--== Inject-X Fuzzer by 1N3@CrowdShield ==-- ' + RESET)
-    print(OKBLUE +   '   --== https://crowdshield.com ==-- ' + RESET)
+    print(OKBLUE +   '--== Inject-X Fuzzer by @xer0dayz ==-- ' + RESET)
+    print(OKBLUE +   '   --== https://xerosecurity.com ==-- ' + RESET)
     print('')
 
 def active_scan():
