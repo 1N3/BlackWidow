@@ -21,8 +21,8 @@ def logo():
     print(OKORANGE + '  /___/_/ /_/_/ /\___/\___/\__/_/|_|  ' + RESET)
     print(OKORANGE + '         /_____/                     ' + RESET)
     print('')
-    print(OKBLUE +   '--== Inject-X Fuzzer by 1N3@CrowdShield ==-- ' + RESET)
-    print(OKBLUE +   '   --== https://crowdshield.com ==-- ' + RESET)
+    print(OKBLUE +   '--== Inject-X Fuzzer by @xer0dayz ==-- ' + RESET)
+    print(OKBLUE +   '   --== https://xerosecurity.com ==-- ' + RESET)
     print('')
 
 def active_scan():
@@ -57,7 +57,7 @@ def active_scan():
 
     # Open Redirect 3 ######################################################################################
     redirect_exploit = urllib.quote_plus("//32lp3si8w5pc.runscope.net")
-    
+
     #if (verbose == "y"):
         #print(COLOR2 + "[i] Trying Payload: " + str(redirect_exploit) + RESET)
 
@@ -68,7 +68,7 @@ def active_scan():
     http_length = len(http_response)
     http_status = http_request.getcode()
     http_length_diff = str(http_length_base - http_length)
-    
+
     if (verbose == "y"):
         print(COLOR2 + "[i] New URL: " + redirect_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
     #os.system("firefox " + redirect_url + "&")
@@ -93,7 +93,7 @@ def active_scan():
     http_length = len(http_response)
     http_status = http_request.getcode()
     http_length_diff = str(http_length_base - http_length)
-    
+
     if (verbose == "y"):
         print(COLOR2 + "[i] New URL: " + redirect_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
     #os.system("firefox " + redirect_url + "&")
@@ -833,7 +833,7 @@ else:
             #print (COLOR2 + "[i] Trying Payload: " + str(redirect_exploit) + RESET)
         redirect_url = new_url.replace("INJECTX", redirect_exploit)
 
-        
+
         http_request = urllib.urlopen(redirect_url)
         http_response = http_request.read()
         http_length = len(http_response)
@@ -861,7 +861,7 @@ else:
             #print(COLOR2 + "[i] Trying Payload: " + str(redirect_exploit) + RESET)
         redirect_url = new_url.replace("INJECTX", redirect_exploit)
 
-        
+
         http_request = urllib.urlopen(redirect_url)
         http_response = http_request.read()
         http_length = len(http_response)
@@ -889,7 +889,7 @@ else:
 
         redirect_url = new_url.replace("INJECTX", redirect_exploit)
 
-        
+
         http_request = urllib.urlopen(redirect_url)
         http_response = http_request.read()
         http_length = len(http_response)
@@ -917,7 +917,7 @@ else:
 
         redirect_url = new_url.replace("INJECTX", redirect_exploit)
 
-        
+
         http_request = urllib.urlopen(redirect_url)
         http_response = http_request.read()
         http_length = len(http_response)
@@ -945,7 +945,7 @@ else:
 
         redirect_url = new_url.replace("INJECTX", redirect_exploit)
 
-        
+
         http_request = urllib.urlopen(redirect_url)
         http_response = http_request.read()
         http_length = len(http_response)

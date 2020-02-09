@@ -1,6 +1,6 @@
 #!/usr/bin/python
-# blackwidow by 1N3 - Last Updated 20180828
-# https://crowdshield.com
+# blackwidow by @xer0dayz - Last Updated 20180828
+# https://xerosecurity.com
 #
 
 from bs4 import BeautifulSoup
@@ -133,32 +133,14 @@ def logo():
   print OKRED + "         . \  \      /  / ."
   print OKRED + "          \_'--`(  )'--'_/"
   print OKRED + "            .--'/()\'--."
-  print OKRED + "     1N3   /  /` '' `\  \ "
+  print OKRED + "@xer0dayz  /  /` '' `\  \ "
   print OKRED + "             |        |"
   print OKRED + "              \      /"
   print OKRED + ""
   print RESET
-  print OKORANGE + " + -- --=[https://crowdshield.com" + RESET
-  print OKORANGE + " + -- --=[blackwidow v" + version + RESET
+  print OKORANGE + " + -- --=[ https://xerosecurity.com" + RESET
+  print OKORANGE + " + -- --=[ blackwidow v" + version + RESET
   print RESET
-
-
-def donations():
-  print COLOR1 + " HACK THE PLANET!!!!!"
-  print "**************************************************************************************************"
-  print "If you haven't already, please donate to this project using the addresses below."
-  print "This will help fascilitate improved features and ongoing support."
-  print ""
-  print "[+] BTC 1Fav36btfmdrYpCAR65XjKHhxuJJwFyKum"
-  print "[+] ETH 0x20bB09273702eaBDFbEE9809473Fd04b969a794d"
-  print "[+] LTC LQ6mPewec3xeLBYMdRP4yzeta6b9urqs2f"
-  print "[+] XMR 4JUdGzvrMFDWrUUwY3toJATSeNwjn54LkCnKBPRzDuhzi5vSepHfUckJNxRL2gjkNrSqtCoRUrEDAgRwsQvVCjZbS3EN24xprAQ1Z5Sy5s"
-  print "[+] ZCASH t1fsizsk2cqqJAjRoUmXJSyoVa9utYucXt7"
-  print ""
-  print "1N3@CrowdShield"
-  print "https://crowdshield.com"
-  print COLOR1 + "**************************************************************************************************" + RESET
-
 
 def exit_handler():
   os.system('sort -u ' + save_dir + domain + "_" + port + '-urls.txt > ' + save_dir + domain + "_" + port + '-urls-sorted.txt 2>/dev/null')
@@ -211,8 +193,6 @@ def exit_handler():
   os.system('rm -f ' + save_dir + domain + "_" + port + '-urls.txt')
   os.system('rm -f ' + save_dir + domain + "_" + port + '-subdomains.txt')
   os.system('rm -f /tmp/' + domain + "_" + port + '-urls.txt 2> /dev/null')
-
-  donations()
 
   if scan == "y":
     os.system('for a in `cat ' + save_dir + domain + "_" + port + '-dynamic-unique.txt`; do python /usr/bin/injectx.py -u $a -v y; done;')
@@ -267,10 +247,17 @@ else:
   ans = scan
   level = 1
 
-  #using a domain and a port or a URL?
+  # using a domain and a port or a URL?
   if ":" not in target:
 
-    if (len(str(domain)) > 4):
+    if len(str(target)) > 6:
+      url = target + ":" + port #big change here
+      #print "url is: " + url
+    else:
+      url = "http://" + str(domain) + ":" + port
+      #print "url is: " + url
+
+    if len(str(domain)) > 4:
       target = "http://" + domain + ":" + port
       #print "target is: " + target
     else:
@@ -278,12 +265,6 @@ else:
       domain = '{uri.netloc}'.format(uri=parsed_uri)
       #print "domain after parsed_uri is now: " + domain
 
-    if (len(str(target)) > 6):
-      url = target + ":" + port #big change here
-      #print "url is: " + url
-    else:
-      url = "http://" + str(domain) + ":" + port
-      #print "url is: " + url
   else:
       url = target
       globalURL = target

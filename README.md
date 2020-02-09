@@ -18,9 +18,7 @@ BlackWidow is a python based web application spider to gather subdomains, URL's,
 
 ## LINUX INSTALL:
 ```
-cp blackwidow /usr/bin/blackwidow 
-cp injectx.py /usr/bin/injectx.py
-pip install -r requirements.txt
+sudo bash install.sh
 ```
 
 ## USAGE:
@@ -45,19 +43,4 @@ docker run -it blackwidow # Defaults to --help
 ```
 
 ## LICENSE:
-This software is released under the GNU General Public License v3.0. See LICENSE.md for details.
-
-## DONATIONS:
-Donations are welcome. This will help facilitate improved features, frequent updates and better overall support.
-- [+] BTC 1Fav36btfmdrYpCAR65XjKHhxuJJwFyKum
-- [+] ETH 0x20bB09273702eaBDFbEE9809473Fd04b969a794d
-- [+] LTC LQ6mPewec3xeLBYMdRP4yzeta6b9urqs2f
-- [+] XMR 4JUdGzvrMFDWrUUwY3toJATSeNwjn54LkCnKBPRzDuhzi5vSepHfUckJNxRL2gjkNrSqtCoRUrEDAgRwsQvVCjZbS3EN24xprAQ1Z5Sy5s
-- [+] ZCASH t1fsizsk2cqqJAjRoUmXJSyoVa9utYucXt7
-
-## SOCIAL MEDIA:
-- [Twitter](https://www.twitter.com/crowdshield "Twitter")
-- [YouTube](https://www.yahoo.com/crowdshield "YouTube")
-- [Blog](https://crowdshield.com/blog.php "Blog")
-- [BugCrowd](https://bugcrowd.com/1N3 "BugCrowd")
-- [HackerOne](https://hackerone.com/1N3 "HackerOne")
+BlackWidow is free to distribute, modify and use with the condition that credit is provided to the creator (@xer0dayz) and @XeroSecurity and is not for commercial use.
