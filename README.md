@@ -43,4 +43,12 @@ docker run -it blackwidow # Defaults to --help
 ```
 
 ## LICENSE:
-BlackWidow is free to distribute, modify and use with the condition that credit is provided to the creator (@xer0dayz) and @XeroSecurity and is not for commercial use.
+You may modify and re-distribute this software as long as the project name "BlackWidow", credit to the author "xer0dayz" and website URL "https://xerosecurity.com" are NOT mofified. Doing so will break the license agreement and a takedown notice will be issued. 
+
+## DISCLAIMER:
+This program is used for educational and ethical purposes only. I take no responsibility for any damages caused from using this program. By downloading and using this software, you agree that you take full responsibility for any damages and liability.
+
+## LINKS:
+- [Twitter](https://www.twitter.com/xer0dayz "Personal Twitter")
+- [Twitter](https://www.twitter.com/xerosecurity "Company Twitter")
+- [Website](https://xerosecurity.com "XeroSecurity")
