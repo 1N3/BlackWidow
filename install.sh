@@ -30,7 +30,7 @@ echo -e "$OKGREEN + -- --=[ This script will install blackwidow. Are you sure yo
 if [[ "$1" != "force" ]]; then
 	read answer
 fi
-
+echo -e "$OKORANGE + -- --=[ Installing BlackWidow... $RESET"
 cp -f $PWD/blackwidow /usr/bin/blackwidow
 cp -f $PWD/injectx.py /usr/bin/injectx.py
 cp -f $PWD/blackwidow.desktop /usr/share/applications/
