@@ -30,7 +30,7 @@ echo -e "$OKORANGE + -- --=[ Installing BlackWidow... $RESET"
 cp -f $PWD/blackwidow /usr/bin/blackwidow
 cp -f $PWD/injectx.py /usr/bin/injectx.py
 cp -f $PWD/blackwidow.desktop /usr/share/applications/
-pip3 install -r $PWD/requirements.txt
+pip install -r $PWD/requirements.txt
 
 echo -e "$OKORANGE + -- --=[ Done! $RESET"
 echo -e "$OKORANGE + -- --=[ To run, type 'blackwidow'! $RESET"
