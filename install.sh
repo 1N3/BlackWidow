@@ -26,11 +26,11 @@ echo -e "$OKRED + -- --=[ https://xerosecurity.com $RESET"
 echo -e "$OKRED + -- --=[ blackwidow $RESET"
 echo ""
 
-echo -e "$OKORANGE + -- --=[ Installing BlackWidow... $RESET"
+echo -e "$OKBLUE[*]$RESET Installing BlackWidow... $RESET"
 cp -f $PWD/blackwidow /usr/bin/blackwidow
 cp -f $PWD/injectx.py /usr/bin/injectx.py
 cp -f $PWD/blackwidow.desktop /usr/share/applications/
 pip install -r $PWD/requirements.txt
 
-echo -e "$OKORANGE + -- --=[ Done! $RESET"
-echo -e "$OKORANGE + -- --=[ To run, type 'blackwidow'! $RESET"
+echo -e "$OKBLUE[*]$RESET Done! $RESET"
+echo -e "$OKRED[>]$RESET To run, type 'blackwidow'! $RESET"
