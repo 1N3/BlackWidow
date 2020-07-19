@@ -1,12 +1,12 @@
-#!/usr/bin/python
-# blackwidow by @xer0dayz - Last Updated 20200630
+#!/usr/bin/python3
+# blackwidow by @xer0dayz - Last Updated 20200717
 # https://xerosecurity.com
 #
 
 from bs4 import BeautifulSoup
-from urlparse import urlparse
+from urllib.parse import urlparse
 import requests, sys, os, atexit, optparse
-from Cookie import SimpleCookie
+from http import cookies
 requests.packages.urllib3.disable_warnings()
 
 OKBLUE='\033[94m'
@@ -42,16 +42,16 @@ def readlinks (url):
   phones_saved = open(save_dir + domain + "_" + port + "-phones.txt","a")
   subdomains_saved = open(save_dir + domain + "_" + port + "-subdomains.txt","a")
 
-  print ""
-  print OKGREEN + "==================================================================================================" + RESET
-  print OKGREEN + url
-  print OKGREEN + "==================================================================================================" + RESET
+  print ("")
+  print (OKGREEN + "==================================================================================================" + RESET)
+  print (OKGREEN + url)
+  print (OKGREEN + "==================================================================================================" + RESET)
   for form in soup.find_all('form'):
-    print OKBLUE + "[+] Extracting form values..."
-    print "__________________________________________________________________________________________________" + OKORANGE
-    print form
-    print OKBLUE + "__________________________________________________________________________________________________"
-    print RESET
+    #print (OKBLUE + "[+] Extracting form values...")
+    #print ("__________________________________________________________________________________________________" + OKORANGE)
+    #print (form)
+    #print (OKBLUE + "__________________________________________________________________________________________________")
+    #print (RESET)
     forms_saved.write(url + "\n")
 
   # PARSE LINKS
@@ -61,7 +61,7 @@ def readlinks (url):
       parsed_uri = urlparse(link.get('href'))
       linkdomain = '{uri.netloc}'.format(uri=parsed_uri)
       if (domain != linkdomain) and (linkdomain != "") and (domain in linkdomain):
-        print COLOR1 + "[+] Sub-domain found! " + linkdomain + " " + RESET
+        print (COLOR1 + "[+] Sub-domain found! " + linkdomain + " " + RESET)
         subdomains_saved.write(linkdomain + "\n")
       # IF LINK STARTS WITH HTTP
       if link.get('href')[:4] == "http":
@@ -69,48 +69,48 @@ def readlinks (url):
         if domain in link.get('href'):
           # IF URL IS DYNAMIC
           if "?" in link.get('href'):
-            print OKRED + "[+] Dynamic URL found! " + link.get('href') + " " + RESET
+            print (OKRED + "[+] Dynamic URL found! " + link.get('href') + " " + RESET)
             urls.write(link.get('href') + "\n")
             urls_saved.write(link.get('href') + "\n")
             dynamic_saved.write(link.get('href') + "\n")
           else:
-            print link.get('href')
+            print (link.get('href'))
             urls.write(link.get('href') + "\n")
             urls_saved.write(link.get('href') + "\n")
         # EXTERNAL LINK FOUND
-        else:
-          # IF URL IS DYNAMIC
-          if "?" in link.get('href'):
-            print COLOR2 + "[+] External Dynamic URL found! " + link.get('href') + " " + RESET
-          else:
-            print COLOR2 + "[i] External link found! " + link.get('href') + " " + RESET
+        #else:
+        # IF URL IS DYNAMIC
+        #if "?" in link.get('href'):
+        #print (COLOR2 + "[+] External Dynamic URL found! " + link.get('href') + " " + RESET)
+        #else:
+        #print (COLOR2 + "[i] External link found! " + link.get('href') + " " + RESET)
       # IF URL IS DYNAMIC
       elif "?" in link.get('href'):
-        print OKRED + "[+] Dynamic URL found! " + globalURL + "/" + link.get('href') + " " + RESET
-        urls.write(globalURL + "/" + link.get('href') + "\n")
-        urls_saved.write(globalURL + "/" + link.get('href') + "\n")
-        dynamic_saved.write(globalURL + "/" + link.get('href') + "\n")
+        print (OKRED + "[+] Dynamic URL found! " + url + "/" + link.get('href') + " " + RESET)
+        urls.write(url + "/" + link.get('href') + "\n")
+        urls_saved.write(url + "/" + link.get('href') + "\n")
+        dynamic_saved.write(url + "/" + link.get('href') + "\n")
       # DOM BASED LINK
-      elif link.get('href')[:1] == "#":
-        print OKBLUE + "[i] DOM based link found! " + link.get('href') + " " + RESET
+      #elif link.get('href')[:1] == "#":
+      #print (OKBLUE + "[i] DOM based link found! " + link.get('href') + " " + RESET)
       # TELEPHONE
       elif link.get('href')[:4] == "tel:":
         s = link.get('href')
         phonenum = s.split(':')[1]
-        print OKORANGE + "[i] Telephone # found! " + phonenum + " " + RESET
+        print (OKORANGE + "[i] Telephone # found! " + phonenum + " " + RESET)
         phones_saved.write(phonenum + "\n")
       # EMAIL
       elif link.get('href')[:7] == "mailto:":
         s = link.get('href')
         email = s.split(':')[1]
-        print OKORANGE + "[i] Email found! " + email + " " + RESET
+        print (OKORANGE + "[i] Email found! " + email + " " + RESET)
         emails_saved.write(email + "\n")
       # ELSE NORMAL LINK FOUND
       else:
-        print url + "/" + link.get('href')
+        print (url + "/" + link.get('href'))
         urls.write(url + "/" + link.get('href') + "\n")
         urls_saved.write(url + "/" + link.get('href') + "\n")
-  print OKGREEN + "__________________________________________________________________________________________________" + RESET
+  print (OKGREEN + "__________________________________________________________________________________________________" + RESET)
 
 def readfile():
   filename = "/tmp/" + domain + "_" + port + "-urls.txt"
@@ -123,24 +123,24 @@ def readfile():
         print(ex)
 
 def logo():
-  version = "1.0"
-  print OKRED + ""
-  print OKRED + ""
-  print OKRED + "                _.._"
-  print OKRED + "              .'    '."
-  print OKRED + "             /   __   \ "
-  print OKRED + "          ,  |   ><   |  ,"
-  print OKRED + "         . \  \      /  / ."
-  print OKRED + "          \_'--`(  )'--'_/"
-  print OKRED + "            .--'/()\'--."
-  print OKRED + "@xer0dayz  /  /` '' `\  \ "
-  print OKRED + "             |        |"
-  print OKRED + "              \      /"
-  print OKRED + ""
-  print RESET
-  print OKORANGE + " + -- --=[ https://xerosecurity.com" + RESET
-  print OKORANGE + " + -- --=[ blackwidow v" + version + RESET
-  print RESET
+  version = "1.3"
+  print (OKRED + "")
+  print (OKRED + "")
+  print (OKRED + "                _.._")
+  print (OKRED + "              .'    '.")
+  print (OKRED + "             /   __   \ ")
+  print (OKRED + "          ,  |   ><   |  ,")
+  print (OKRED + "         . \  \      /  / .")
+  print (OKRED + "          \_'--`(  )'--'_/")
+  print (OKRED + "            .--'/()\'--.")
+  print (OKRED + "@xer0dayz  /  /` '' `\  \ ")
+  print (OKRED + "             |        |")
+  print (OKRED + "              \      /")
+  print (OKRED + "")
+  print (RESET)
+  print (OKORANGE + " + -- --=[ https://xerosecurity.com" + RESET)
+  print (OKORANGE + " + -- --=[ blackwidow v" + version + RESET)
+  print (RESET)
 
 def exit_handler():
   os.system('sort -u ' + save_dir + domain + "_" + port + '-urls.txt > ' + save_dir + domain + "_" + port + '-urls-sorted.txt 2>/dev/null')
@@ -154,37 +154,37 @@ def exit_handler():
   os.system('sort -u ' + save_dir + domain + "_" + port + '-phones.txt > ' + save_dir + domain + "_" + port + '-phones-sorted.txt 2>/dev/null')
 
   logo()
-  print OKGREEN + "[+] URL's Discovered: \n" + save_dir + domain + "_" + port + "-urls-sorted.txt" + RESET
-  print OKGREEN + "__________________________________________________________________________________________________" + RESET
+  print (OKGREEN + "[+] URL's Discovered: \n" + save_dir + domain + "_" + port + "-urls-sorted.txt" + RESET)
+  print (OKGREEN + "__________________________________________________________________________________________________" + RESET)
   os.system('cat ' + save_dir + domain + "_" + port + '-urls-sorted.txt')
-  print RESET
-  print OKGREEN + "[+] Dynamic URL's Discovered: \n" + save_dir + domain + "_" + port + "-dynamic-sorted.txt" + RESET
-  print OKGREEN + "__________________________________________________________________________________________________" + RESET
+  print (RESET)
+  print (OKGREEN + "[+] Dynamic URL's Discovered: \n" + save_dir + domain + "_" + port + "-dynamic-sorted.txt" + RESET)
+  print (OKGREEN + "__________________________________________________________________________________________________" + RESET)
   os.system('cat ' + save_dir + domain + "_" + port + '-dynamic-sorted.txt')
-  print RESET
-  print OKGREEN + "[+] Form URL's Discovered: \n" + save_dir + domain + "_" + port + "-forms-sorted.txt" + RESET
-  print OKGREEN + "__________________________________________________________________________________________________" + RESET
+  print (RESET)
+  print (OKGREEN + "[+] Form URL's Discovered: \n" + save_dir + domain + "_" + port + "-forms-sorted.txt" + RESET)
+  print (OKGREEN + "__________________________________________________________________________________________________" + RESET)
   os.system('cat ' + save_dir + domain + "_" + port + '-forms-sorted.txt')
-  print RESET
-  print OKGREEN + "[+] Unique Dynamic Parameters Discovered: \n" + save_dir + domain + "_" + port + "-dynamic-unique.txt" + RESET
-  print OKGREEN + "__________________________________________________________________________________________________" + RESET
+  print (RESET)
+  print (OKGREEN + "[+] Unique Dynamic Parameters Discovered: \n" + save_dir + domain + "_" + port + "-dynamic-unique.txt" + RESET)
+  print (OKGREEN + "__________________________________________________________________________________________________" + RESET)
   os.system('cat ' + save_dir + domain + "_" + port + '-dynamic-unique.txt')
-  print RESET
-  print OKGREEN + "[+] Sub-domains Discovered: \n" + save_dir + domain + "_" + port + "-subdomains-sorted.txt" + RESET
-  print OKGREEN + "__________________________________________________________________________________________________" + RESET
+  print (RESET)
+  print (OKGREEN + "[+] Sub-domains Discovered: \n" + save_dir + domain + "_" + port + "-subdomains-sorted.txt" + RESET)
+  print (OKGREEN + "__________________________________________________________________________________________________" + RESET)
   os.system('cat ' + save_dir + domain + "_" + port + '-subdomains-sorted.txt')
-  print RESET
-  print OKGREEN + "[+] Emails Discovered: \n" + save_dir + domain + "_" + port + "-emails-sorted.txt" + RESET
-  print OKGREEN + "__________________________________________________________________________________________________" + RESET
+  print (RESET)
+  print (OKGREEN + "[+] Emails Discovered: \n" + save_dir + domain + "_" + port + "-emails-sorted.txt" + RESET)
+  print (OKGREEN + "__________________________________________________________________________________________________" + RESET)
   os.system('cat ' + save_dir + domain + "_" + port + '-emails-sorted.txt')
-  print RESET
-  print OKGREEN + "[+] Phones Discovered: \n" + save_dir + domain + "_" + port + "-phones-sorted.txt" + RESET
-  print OKGREEN + "__________________________________________________________________________________________________" + RESET
+  print (RESET)
+  print (OKGREEN + "[+] Phones Discovered: \n" + save_dir + domain + "_" + port + "-phones-sorted.txt" + RESET)
+  print (OKGREEN + "__________________________________________________________________________________________________" + RESET)
   os.system('cat ' + save_dir + domain + "_" + port + '-phones-sorted.txt')
-  print RESET
-  print OKRED + "[+] Loot Saved To: \n" + save_dir + RESET
-  print OKRED + "__________________________________________________________________________________________________" + RESET
-  print RESET
+  print (RESET)
+  print (OKRED + "[+] Loot Saved To: \n" + save_dir + RESET)
+  print (OKRED + "__________________________________________________________________________________________________" + RESET)
+  print (RESET)
 
   os.system('rm -f ' + save_dir + domain + "_" + port + '-dynamic.txt')
   os.system('rm -f ' + save_dir + domain + "_" + port + '-forms.txt')
@@ -195,7 +195,7 @@ def exit_handler():
   os.system('rm -f /tmp/' + domain + "_" + port + '-urls.txt 2> /dev/null')
 
   if scan == "y":
-    os.system('for a in `cat ' + save_dir + domain + "_" + port + '-dynamic-unique.txt`; do python /usr/bin/injectx.py -u $a -v y; done;')
+    os.system('for a in `cat ' + save_dir + domain + "_" + port + '-dynamic-unique.txt`; do python3 /usr/bin/injectx.py -u $a; done;')
   else:
     pass
 
@@ -204,37 +204,37 @@ def exit_handler():
 logo()
 globalURL = "globalBadness"
 if len(sys.argv) < 2:
-  print "You need to specify a URL to scan. Use --help for all options."
+  print ("You need to specify a URL to scan. Use --help for all options.")
   quit()
 else:
   parser = optparse.OptionParser()
   parser.add_option('-u', '--url',
-      action="store", dest="url",
-      help="Full URL to spider", default="")
+                    action="store", dest="url",
+                    help="Full URL to spider", default="")
 
   parser.add_option('-d', '--domain',
-      action="store", dest="domain",
-      help="Domain name to spider", default="")
+                    action="store", dest="domain",
+                    help="Domain name to spider", default="")
 
   parser.add_option('-c', '--cookie',
-      action="store", dest="cookie",
-      help="Cookies to send", default="")
+                    action="store", dest="cookie",
+                    help="Cookies to send", default="")
 
   parser.add_option('-l', '--level',
-      action="store", dest="level",
-      help="Level of depth to traverse", default="2")
+                    action="store", dest="level",
+                    help="Level of depth to traverse", default="2")
 
   parser.add_option('-s', '--scan',
-      action="store", dest="scan",
-      help="Scan all dynamic URL's found", default="n")
+                    action="store", dest="scan",
+                    help="Scan all dynamic URL's found", default="n")
 
   parser.add_option('-p', '--port',
-      action="store", dest="port",
-      help="Port for the URL", default="80")
+                    action="store", dest="port",
+                    help="Port for the URL", default="80")
 
   parser.add_option('-v', '--verbose',
-      action="store", dest="verbose",
-      help="Set verbose mode ON", default="y")
+                    action="store", dest="verbose",
+                    help="Set verbose mode ON", default="y")
 
   options, args = parser.parse_args()
   target = str(options.url)
@@ -252,34 +252,29 @@ else:
 
     if len(str(target)) > 6:
       url = target + ":" + port #big change here
-      #print "url is: " + url
+
     else:
       url = "http://" + str(domain) + ":" + port
-      #print "url is: " + url
 
     if len(str(domain)) > 4:
       target = "http://" + domain + ":" + port
-      #print "target is: " + target
     else:
+      print (target)
+      urlparse(target)
       parsed_uri = urlparse(target)
       domain = '{uri.netloc}'.format(uri=parsed_uri)
-      #print "domain after parsed_uri is now: " + domain
 
   else:
-      url = target
-      globalURL = target
-      #print "url is: " + url
-      parsed_uri = urlparse(target)
-      domainWithPort = '{uri.netloc}'.format(uri=parsed_uri)
-      domain = domainWithPort.split(':')[0]
-      #print "domain after parsed_uri is now: " + domain
-      if (len(target.split(':')) > 2):
-        portWithPossiblePath = target.split(':')[2]
-        port = portWithPossiblePath.split('/')[0]
-        #print "port is: " + port
-      else:
-        port = port
-        #print "port is: " + port
+    url = target
+    globalURL = target
+    parsed_uri = urlparse(target)
+    domainWithPort = '{uri.netloc}'.format(uri=parsed_uri)
+    domain = domainWithPort.split(':')[0]
+    if (len(target.split(':')) > 2):
+      portWithPossiblePath = target.split(':')[2]
+      port = portWithPossiblePath.split('/')[0]
+    else:
+      port = port
 
   save_dir = "/usr/share/blackwidow/" + domain + "_" + port + "/"
   os.system('mkdir -p ' + save_dir + ' 2>/dev/null')
