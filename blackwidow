@@ -139,7 +139,7 @@ def logo():
   print (OKRED + "")
   print (RESET)
   print (OKORANGE + " + -- --=[ https://xerosecurity.com" + RESET)
-  print (OKORANGE + " + -- --=[ blackwidow v" + version + RESET)
+  print (OKORANGE + " + -- --=[ blackwidow v" + version + " by @xer0dayz " + RESET)
   print (RESET)
 
 def exit_handler():
@@ -198,8 +198,6 @@ def exit_handler():
     os.system('for a in `cat ' + save_dir + domain + "_" + port + '-dynamic-unique.txt`; do python3 /usr/bin/injectx.py -u $a; done;')
   else:
     pass
-
-
 
 logo()
 globalURL = "globalBadness"

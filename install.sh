@@ -23,14 +23,15 @@ echo -e "$OKRED                \      /$RESET"
 echo -e "$OKRED $RESET"
 echo ""
 echo -e "$OKRED + -- --=[ https://xerosecurity.com $RESET"
-echo -e "$OKRED + -- --=[ blackwidow $RESET"
+echo -e "$OKRED + -- --=[ blackwidow by @xer0dayz $RESET"
 echo ""
 
 echo -e "$OKBLUE[*]$RESET Installing BlackWidow... $RESET"
+apt update
+apt install -y python3 python3-requests python3-pip python3-lxml python3-requests openssl ca-certificates python3-dev wget git
 cp -f $PWD/blackwidow /usr/bin/blackwidow
 cp -f $PWD/injectx.py /usr/bin/injectx.py
 cp -f $PWD/blackwidow.desktop /usr/share/applications/
-pip3 install -r $PWD/requirements.txt
 
 echo -e "$OKBLUE[*]$RESET Done! $RESET"
 echo -e "$OKRED[>]$RESET To run, type 'blackwidow'! $RESET"
