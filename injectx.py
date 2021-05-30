@@ -6,6 +6,7 @@ from __future__ import print_function
 from urllib.parse import urlparse
 import urllib.request, sys, os, optparse
 from socket import timeout
+import sys
 
 OKBLUE='\033[94m'
 OKRED='\033[91m'
@@ -702,7 +703,7 @@ def active_scan():
 logo()
 if len(sys.argv) < 2:
     print("You need to specify a URL to scan (ie. -u https://site.com). Use --help for all options.")
-    quit()
+    sys.exit()
 else:
     parser = optparse.OptionParser()
     parser.add_option('-u', '--url',
