@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 import requests, sys, os, atexit, optparse
 from http import cookies
+
 requests.packages.urllib3.disable_warnings()
 
 OKBLUE='\033[94m'
@@ -203,7 +204,7 @@ logo()
 globalURL = "globalBadness"
 if len(sys.argv) < 2:
   print ("You need to specify a URL to scan. Use --help for all options.")
-  quit()
+  sys.exit()
 else:
   parser = optparse.OptionParser()
   parser.add_option('-u', '--url',
