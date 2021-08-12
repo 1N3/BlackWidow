@@ -231,6 +231,10 @@ else:
                     action="store", dest="port",
                     help="Port for the URL", default="80")
 
+  parser.add_option('-o', '--output',
+                    action="store", dest="output",
+                    help="Set the output directory for results", default="n")
+
   parser.add_option('-v', '--verbose',
                     action="store", dest="verbose",
                     help="Set verbose mode ON", default="y")
@@ -243,6 +247,7 @@ else:
   scan = str(options.scan)
   port = str(options.port)
   verbose = str(options.verbose)
+  output = str(options.output)
   ans = scan
   level = 1
 
@@ -275,7 +280,10 @@ else:
     else:
       port = port
 
-  save_dir = "/usr/share/blackwidow/" + domain + "_" + port + "/"
+  if (len(str(output)) > 1):
+    save_dir = output + "/"
+  else:
+    save_dir = "/usr/share/blackwidow/" + domain + "_" + port + "/"
   os.system('mkdir -p ' + save_dir + ' 2>/dev/null')
   atexit.register(exit_handler)
 
