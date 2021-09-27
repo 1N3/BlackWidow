@@ -702,7 +702,7 @@ def active_scan():
 logo()
 if len(sys.argv) < 2:
     print("You need to specify a URL to scan (ie. -u https://site.com). Use --help for all options.")
-    quit()
+    sys.exit()
 else:
     parser = optparse.OptionParser()
     parser.add_option('-u', '--url',

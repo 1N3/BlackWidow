@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=blackwidow
 Encoding=UTF-8
-Exec=bash-wrapper "sudo blackwidow"
+Exec=/usr/share/kali-menu/exec-in-shell "sudo blackwidow"
 Icon=kali-www
 StartupNotify=false
 Terminal=true
