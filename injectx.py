@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # InjectX Fuzzer by @xer0dayz
-# https://xerosecurity.com
+# https://sn1persecurity.com
 
 from __future__ import print_function
 from urllib.parse import urlparse
@@ -26,7 +26,7 @@ def logo():
     print(OKORANGE + '         /_____/                     ' + RESET)
     print('')
     print(OKGREEN +   '--== Inject-X Fuzzer by @xer0dayz ==-- ' + RESET)
-    print(OKGREEN +   '   --== https://xerosecurity.com ==-- ' + RESET)
+    print(OKGREEN +   '   --== https://sn1persecurity.com ==-- ' + RESET)
     print('')
 
 def active_scan():

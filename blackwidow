@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # blackwidow by @xer0dayz - Last Updated 20200717
-# https://xerosecurity.com
+# https://sn1persecurity.com
 #
 
 from bs4 import BeautifulSoup
@@ -138,7 +138,7 @@ def logo():
   print (OKRED + "              \      /")
   print (OKRED + "")
   print (RESET)
-  print (OKORANGE + " + -- --=[ https://xerosecurity.com" + RESET)
+  print (OKORANGE + " + -- --=[ https://sn1persecurity.com" + RESET)
   print (OKORANGE + " + -- --=[ blackwidow v" + version + " by @xer0dayz " + RESET)
   print (RESET)
 

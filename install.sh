@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Install script for blackwidow & injectx fuzzer
-# Crated by @xer0dayz - https://xerosecurity.com
+# Crated by @xer0dayz - https://sn1persecurity.com
 
 OKBLUE='\033[94m'
 OKRED='\033[91m'
@@ -22,7 +22,7 @@ echo -e "$OKRED               |        |$RESET"
 echo -e "$OKRED                \      /$RESET"
 echo -e "$OKRED $RESET"
 echo ""
-echo -e "$OKRED + -- --=[ https://xerosecurity.com $RESET"
+echo -e "$OKRED + -- --=[ https://sn1persecurity.com $RESET"
 echo -e "$OKRED + -- --=[ blackwidow by @xer0dayz $RESET"
 echo ""
 
