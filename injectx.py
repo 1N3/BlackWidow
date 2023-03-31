@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# InjectX Fuzzer by @xer0dayz
+# InjectX Fuzzer v20230331 by @xer0dayz
 # https://sn1persecurity.com
 
 from __future__ import print_function
@@ -29,6 +29,11 @@ def logo():
     print(OKGREEN +   '   --== https://sn1persecurity.com ==-- ' + RESET)
     print('')
 
+if os.path.isfile("/tmp/injectx.txt"):
+    os.remove("/tmp/injectx.txt")
+
+f = open('/tmp/injectx.txt', 'w')
+
 def active_scan():
 
     new_url = base_url
@@ -54,6 +59,7 @@ def active_scan():
             print(OKRED + "[+] Open Redirect Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + redirect_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto")
+            f.write("P3 - MEDIUM, Open Redirect, " + str(redirect_url) + ", " + str(http_status) + "\n")
 
     except:
         pass
@@ -79,6 +85,7 @@ def active_scan():
             print(OKRED + "[+] Open Redirect Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + redirect_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto")
+            f.write("P3 - MEDIUM, Open Redirect, " + str(redirect_url) + ", " + str(http_status) + "\n")
 
     except:
         pass
@@ -104,6 +111,7 @@ def active_scan():
             print(OKRED + "[+] Open Redirect Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + redirect_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto")
+            f.write("P3 - MEDIUM, Open Redirect, " + str(redirect_url) + ", " + str(http_status) + "\n")
 
     except:
         pass
@@ -125,6 +133,7 @@ def active_scan():
         # CHECK FOR REFLECTED VALUE
         if payload in http_response:
             print(OKGREEN + "[+] Reflected Value Detected! " + RESET)
+            f.write("P5 - INFO, Reflected Value Detected, " + str(new_url) + ", Payload: " + str(payload) + "\n")
 
             # IF REFLECTED, TRY HEURISTIC STRING
             payload_exploit_unencoded = '</INJECTX>(1)'
@@ -162,6 +171,7 @@ def active_scan():
                     print(OKRED + "[+] Vulnerable URL: " + xss_url2 + RESET)
                     print(OKGREEN + "[c] Exploit Command: firefox '" + xss_url2 + "' & ")
                     os.system("curl -s '" + xss_url2 + "' | egrep alert\(1\) --color=auto")
+                    f.write("P3 - MEDIUM, Cross-Site Scripting (XSS), " + str(xss_url2) + ", " + str(payload_exploit2) + "\n")
                     #os.system("firefox '" + xss_url2 + "' > /dev/null 2> /dev/null")
                 except:
                     pass
@@ -190,6 +200,7 @@ def active_scan():
             sqlmap_command = 'sqlmap --batch --dbs -u "' + full_url + '"'
             print(OKGREEN + "[c] Exploit Command: " + sqlmap_command)
             #os.system(sqlmap_command)
+            f.write("P2 - HIGH, SQL Injection, " + str(sqli_url) + ", " + str(full_url) + "\n")
 
     except:
         pass
@@ -215,6 +226,7 @@ def active_scan():
             sqlmap_command = 'sqlmap --batch --dbs -u "' + full_url + '"'
             print(OKGREEN + "[c] Exploit Command: " + sqlmap_command)
             #os.system(sqlmap_command)
+            f.write("P2 - HIGH, SQL Injection, " + str(sqli_url) + ", " + str(full_url) + "\n")
 
     except:
         pass
@@ -238,6 +250,7 @@ def active_scan():
             print(OKRED + "[+] Windows Directory Traversal Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto")
+            f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
 
     except:
         pass
@@ -261,6 +274,7 @@ def active_scan():
             print(OKRED + "[+] Windows Directory Traversal Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto")
+            f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
 
     except:
         pass
@@ -284,6 +298,7 @@ def active_scan():
             print(OKRED + "[+] Windows Directory Traversal Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto" + RESET)
+            f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
 
     except:
         pass
@@ -307,6 +322,7 @@ def active_scan():
             print(OKRED + "[+] Windows Directory Traversal Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto" + RESET)
+            f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
 
     except:
         pass
@@ -330,6 +346,7 @@ def active_scan():
             print(OKRED + "[+] Linux Directory Traversal Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep root --color=auto" + RESET)
+            f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
 
     except:
         pass
@@ -353,6 +370,7 @@ def active_scan():
             print(OKRED + "[+] Linux Directory Traversal Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep root --color=auto" + RESET)
+            f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
 
     except:
         pass
@@ -376,6 +394,7 @@ def active_scan():
             print(OKRED + "[+] Linux Local File Inclusion Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rfi_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rfi_url + "' | egrep 'root:' --color=auto" + RESET)
+            f.write("P2 - HIGH, Local File Inclusion, " + str(rfi_url) + ", " + str(rfi_exploit) + "\n")
 
     except:
         pass
@@ -399,6 +418,7 @@ def active_scan():
             print(OKRED + "[+] Linux Local File Inclusion Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rfi_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rfi_url + "' | egrep 'root:' --color=auto" + RESET)
+            f.write("P2 - HIGH, Local File Inclusion, " + str(rfi_url) + ", " + str(rfi_exploit) + "\n")
 
     except:
         pass
@@ -422,6 +442,7 @@ def active_scan():
             print(OKRED + "[+] Windows Local File Inclusion Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rfi_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rfi_url + "' | egrep 'root:' --color=auto" + RESET)
+            f.write("P2 - HIGH, Local File Inclusion, " + str(rfi_url) + ", " + str(rfi_exploit) + "\n")
 
     except:
         pass
@@ -445,6 +466,7 @@ def active_scan():
             print(OKRED + "[+] Local File Inclusion Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rfi_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rfi_url + "' | egrep 'root:' --color=auto" + RESET)
+            f.write("P2 - HIGH, Local File Inclusion, " + str(rfi_url) + ", " + str(rfi_exploit) + "\n")
 
     except:
         pass
@@ -468,6 +490,7 @@ def active_scan():
             print(OKRED + "[+] Remote File Inclusion Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rfi_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rfi_url + "' | egrep 705cd559b16e6946826207c2199bd890 --color=auto")
+            f.write("P2 - HIGH, Remote File Inclusion, " + str(rfi_url) + ", " + str(rfi_exploit) + "\n")
 
     except:
         pass
@@ -491,6 +514,7 @@ def active_scan():
             print(OKRED + "[+] Remote File Inclusion Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rfi_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rfi_url + "' | egrep 705cd559b16e6946826207c2199bd890 --color=auto")
+            f.write("P2 - HIGH, Remote File Inclusion, " + str(rfi_url) + ", " + str(rfi_exploit) + "\n")
 
     except:
         pass
@@ -557,6 +581,7 @@ def active_scan():
             print(OKRED + "[+] Server Side Template Injection Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + ssti_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + ssti_url + "' | egrep 1337 --color=auto" + RESET)
+            f.write("P3 - MEDIUM, Server Side Template Injection, " + str(ssti_url) + ", " + str(ssti_exploit) + "\n")
 
     except:
         pass
@@ -580,6 +605,7 @@ def active_scan():
             print(OKRED + "[+] Server Side Template Injection Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + ssti_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + ssti_url + "' | egrep 1337 --color=auto" + RESET)
+            f.write("P3 - MEDIUM, Server Side Template Injection, " + str(ssti_url) + ", " + str(ssti_exploit) + "\n")
 
     except:
         pass
@@ -603,6 +629,7 @@ def active_scan():
             print(OKRED + "[+] Linux Command Injection Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rce_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rce_url + "' | egrep root: --color=auto" + RESET)
+            f.write("P1 - Critical, Command Execution, " + str(rce_url) + ", " + str(rce_exploit) + "\n")
 
     except:
         pass
@@ -626,6 +653,7 @@ def active_scan():
             print(OKRED + "[+] Linux Time Based Command Injection Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rce_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rce_url + "' | egrep root: --color=auto" + RESET)
+            f.write("P1 - Critical, Command Execution, " + str(rce_url) + ", " + str(rce_exploit) + "\n")
 
     except:
         pass
@@ -649,6 +677,7 @@ def active_scan():
             print(OKRED + "[+] Generic PHP Command Injection Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rce_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rce_url + "' | egrep PHP --color=auto" + RESET)
+            f.write("P1 - Critical, Command Execution, " + str(rce_url) + ", " + str(rce_exploit) + "\n")
 
     except:
         pass
@@ -672,6 +701,7 @@ def active_scan():
             print(OKRED + "[+] Linux PHP Command Injection Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rce_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rce_url + "' | egrep root: --color=auto" + RESET)
+            f.write("P1 - Critical, Command Execution, " + str(rce_url) + ", " + str(rce_exploit) + "\n")
 
     except:
         pass
@@ -695,6 +725,7 @@ def active_scan():
             print(OKRED + "[+] PHP Command Injection Found! " + RESET)
             print(OKRED + "[+] Vulnerable URL: " + rce_url + RESET)
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rce_url + "' | egrep root: --color=auto" + RESET)
+            f.write("P1 - Critical, Command Execution, " + str(rce_url) + ", " + str(rce_exploit) + "\n")
 
     except:
         pass
@@ -834,6 +865,7 @@ else:
                 print(OKRED + "[+] Open Redirect Found! " + RESET)
                 print(OKRED + "[+] Vulnerable URL: " + redirect_url + RESET)
                 print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto" + RESET)
+                f.write("P3 - MEDIUM, Open Redirect, " + str(redirect_url) + ", " + str(redirect_exploit) + "\n")
 
         except:
             pass
@@ -859,6 +891,7 @@ else:
                 print(OKRED + "[+] Open Redirect Found! " + RESET)
                 print(OKRED + "[+] Vulnerable URL: " + redirect_url + RESET)
                 print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto" + RESET)
+                f.write("P3 - MEDIUM, Open Redirect, " + str(redirect_url) + ", " + str(redirect_exploit) + "\n")
 
         except:
             pass
@@ -886,6 +919,7 @@ else:
                 print(OKRED + "[+] Open Redirect Found! " + RESET)
                 print(OKRED + "[+] Vulnerable URL: " + redirect_url + RESET)
                 print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto" + RESET)
+                f.write("P3 - MEDIUM, Open Redirect, " + str(redirect_url) + ", " + str(redirect_exploit) + "\n")
 
         except:
             pass
@@ -913,6 +947,7 @@ else:
                 print(OKRED + "[+] Open Redirect Found! " + RESET)
                 print(OKRED + "[+] Vulnerable URL: " + redirect_url + RESET)
                 print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto" + RESET)
+                f.write("P3 - MEDIUM, Open Redirect, " + str(redirect_url) + ", " + str(redirect_exploit) + "\n")
 
         except:
             pass
@@ -940,6 +975,7 @@ else:
                 print(OKRED + "[+] Open Redirect Found! " + RESET)
                 print(OKRED + "[+] Vulnerable URL: " + redirect_url + RESET)
                 print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto" + RESET)
+                f.write("P3 - MEDIUM, Open Redirect, " + str(redirect_url) + ", " + str(redirect_exploit) + "\n")
 
         except:
             pass
@@ -966,6 +1002,7 @@ else:
                 print(OKRED + "[+] Windows Directory Traversal Found! " + RESET)
                 print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
                 print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto" + RESET)
+                f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
         except:
             pass
 
@@ -991,6 +1028,7 @@ else:
                 print(OKRED + "[+] Windows Directory Traversal Found! " + RESET)
                 print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
                 print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto" + RESET)
+                f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
         except:
             pass
 
@@ -1019,6 +1057,7 @@ else:
                     print(OKRED + "[+] Windows Directory Traversal Found! " + RESET)
                     print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
                     print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto" + RESET)
+                    f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
             except:
                 pass
         except:
@@ -1044,6 +1083,7 @@ else:
                 print(OKRED + "[+] Linux Directory Traversal Found! " + RESET)
                 print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
                 print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep root --color=auto" + RESET)
+                f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
 
         except:
             pass
@@ -1072,6 +1112,7 @@ else:
                 print(OKRED + "[+] Linux Directory Traversal Found! " + RESET)
                 print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
                 print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep root --color=auto") + RESET
+                f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
 
         except:
             pass
@@ -1079,3 +1120,4 @@ else:
 print(OKORANGE + "______________________________________________________________________________________________________" + RESET)
 print(RESET)
 print(RESET)
+f.close()
