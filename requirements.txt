@@ -2,5 +2,4 @@ coloredlogs
 beautifulsoup4
 requests
 lxml
-cookies
 urllib3

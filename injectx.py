@@ -780,7 +780,7 @@ elif str(http_status_base) == "403":
 else:
     if "=" in full_url:
 
-        parsed = urllib.request.urlparse(full_url)
+        parsed = urllib.parse.urlparse(full_url)
         params = urllib.parse.parse_qsl(parsed.query)
         param_list = []
         param_vals = []
@@ -1111,7 +1111,7 @@ else:
             if "root:" in http_response:
                 print(OKRED + "[+] Linux Directory Traversal Found! " + RESET)
                 print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
-                print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep root --color=auto") + RESET
+                print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep root --color=auto" + RESET)
                 f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
 
         except:
