@@ -61,7 +61,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto")
             f.write("P3 - MEDIUM, Open Redirect, " + str(redirect_url) + ", " + str(http_status) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # Open Redirect 2 ######################################################################################
@@ -87,7 +87,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto")
             f.write("P3 - MEDIUM, Open Redirect, " + str(redirect_url) + ", " + str(http_status) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # Open Redirect 3 ######################################################################################
@@ -113,7 +113,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto")
             f.write("P3 - MEDIUM, Open Redirect, " + str(redirect_url) + ", " + str(http_status) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # XSS ######################################################################################
@@ -149,7 +149,7 @@ def active_scan():
                 if (verbose == "y"):
                     print(COLOR2 + "[i] New URL: " + xss_url + " [" + OKRED + str(http_status) + COLOR2 + "]" + " [" + COLOR3 + str(http_length) + COLOR2 + "]" + " [" + COLOR1 + http_length_diff + COLOR2 + "]" + RESET)
 
-            except:
+            except Exception as ex:
                 pass
 
             # CONTINUE TO XSS EXPLOITATION
@@ -173,10 +173,10 @@ def active_scan():
                     os.system("curl -s '" + xss_url2 + "' | egrep alert\\(1\\) --color=auto")
                     f.write("P3 - MEDIUM, Cross-Site Scripting (XSS), " + str(xss_url2) + ", " + str(payload_exploit2) + "\n")
                     #os.system("firefox '" + xss_url2 + "' > /dev/null 2> /dev/null")
-                except:
+                except Exception as ex:
                     pass
 
-    except:
+    except Exception as ex:
         pass
 
     # SQLi ######################################################################################
@@ -202,7 +202,7 @@ def active_scan():
             #os.system(sqlmap_command)
             f.write("P2 - HIGH, SQL Injection, " + str(sqli_url) + ", " + str(full_url) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # SQLi 2 ######################################################################################
@@ -228,7 +228,7 @@ def active_scan():
             #os.system(sqlmap_command)
             f.write("P2 - HIGH, SQL Injection, " + str(sqli_url) + ", " + str(full_url) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # Windows Directory Traversal ######################################################################################
@@ -252,7 +252,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto")
             f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # Windows Directory Traversal 2 ######################################################################################
@@ -276,7 +276,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto")
             f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # Windows Directory Traversal 3 ######################################################################################
@@ -300,7 +300,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto" + RESET)
             f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # Windows Directory Traversal 4 ######################################################################################
@@ -324,7 +324,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto" + RESET)
             f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # Linux Directory Traversal ######################################################################################
@@ -348,7 +348,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep root --color=auto" + RESET)
             f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # Linux Directory Traversal 2 ######################################################################################
@@ -372,7 +372,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep root --color=auto" + RESET)
             f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # LFI Check ######################################################################################
@@ -396,7 +396,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rfi_url + "' | egrep 'root:' --color=auto" + RESET)
             f.write("P2 - HIGH, Local File Inclusion, " + str(rfi_url) + ", " + str(rfi_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # LFI Check 2 ######################################################################################
@@ -420,7 +420,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rfi_url + "' | egrep 'root:' --color=auto" + RESET)
             f.write("P2 - HIGH, Local File Inclusion, " + str(rfi_url) + ", " + str(rfi_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # LFI Check 3 ######################################################################################
@@ -444,7 +444,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rfi_url + "' | egrep 'root:' --color=auto" + RESET)
             f.write("P2 - HIGH, Local File Inclusion, " + str(rfi_url) + ", " + str(rfi_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # LFI Check 4 ######################################################################################
@@ -468,7 +468,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rfi_url + "' | egrep 'root:' --color=auto" + RESET)
             f.write("P2 - HIGH, Local File Inclusion, " + str(rfi_url) + ", " + str(rfi_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # RFI Check ######################################################################################
@@ -492,7 +492,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rfi_url + "' | egrep 705cd559b16e6946826207c2199bd890 --color=auto")
             f.write("P2 - HIGH, Remote File Inclusion, " + str(rfi_url) + ", " + str(rfi_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # RFI Check 2 ######################################################################################
@@ -516,7 +516,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rfi_url + "' | egrep 705cd559b16e6946826207c2199bd890 --color=auto")
             f.write("P2 - HIGH, Remote File Inclusion, " + str(rfi_url) + ", " + str(rfi_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # IDOR Check ######################################################################################
@@ -583,7 +583,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + ssti_url + "' | egrep 1337 --color=auto" + RESET)
             f.write("P3 - MEDIUM, Server Side Template Injection, " + str(ssti_url) + ", " + str(ssti_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # SSTI Check 2 ######################################################################################
@@ -607,7 +607,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + ssti_url + "' | egrep 1337 --color=auto" + RESET)
             f.write("P3 - MEDIUM, Server Side Template Injection, " + str(ssti_url) + ", " + str(ssti_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # RCE Linux Check ######################################################################################
@@ -631,7 +631,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rce_url + "' | egrep root: --color=auto" + RESET)
             f.write("P1 - Critical, Command Execution, " + str(rce_url) + ", " + str(rce_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # RCE Linux Check 2 ######################################################################################
@@ -655,7 +655,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rce_url + "' | egrep root: --color=auto" + RESET)
             f.write("P1 - Critical, Command Execution, " + str(rce_url) + ", " + str(rce_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # RCE PHP Check ######################################################################################
@@ -679,7 +679,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rce_url + "' | egrep PHP --color=auto" + RESET)
             f.write("P1 - Critical, Command Execution, " + str(rce_url) + ", " + str(rce_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # RCE PHP Check 2 ######################################################################################
@@ -703,7 +703,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rce_url + "' | egrep root: --color=auto" + RESET)
             f.write("P1 - Critical, Command Execution, " + str(rce_url) + ", " + str(rce_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
     # RCE PHP Check 3 ######################################################################################
@@ -727,7 +727,7 @@ def active_scan():
             print(OKGREEN + "[c] Exploit Command: curl -s '" + rce_url + "' | egrep root: --color=auto" + RESET)
             f.write("P1 - Critical, Command Execution, " + str(rce_url) + ", " + str(rce_exploit) + "\n")
 
-    except:
+    except Exception as ex:
         pass
 
 logo()
@@ -766,7 +766,7 @@ try:
     print(COLOR3 + ">>> " + OKORANGE + full_url + COLOR2 + " [" + OKRED + str(http_status_base) + COLOR2 + "]" + " [" + COLOR3 + str(http_length_base) + COLOR2 + "]" + RESET)
     print(COLOR3 + "======================================================================================================" + RESET)
 
-except:
+except Exception as ex:
     print(RESET)
     print(COLOR3 + ">>> " + OKORANGE + full_url + COLOR2 + " [" + OKRED + str(http_status_base) + COLOR2 + "]" + " [" + COLOR3 + str(http_length_base) + COLOR2 + "]" + RESET)
     print(COLOR3 + "======================================================================================================" + RESET)
@@ -867,7 +867,7 @@ else:
                 print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto" + RESET)
                 f.write("P3 - MEDIUM, Open Redirect, " + str(redirect_url) + ", " + str(redirect_exploit) + "\n")
 
-        except:
+        except Exception as ex:
             pass
 
         # Open Redirect ######################################################################################
@@ -893,7 +893,7 @@ else:
                 print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto" + RESET)
                 f.write("P3 - MEDIUM, Open Redirect, " + str(redirect_url) + ", " + str(redirect_exploit) + "\n")
 
-        except:
+        except Exception as ex:
             pass
 
         new_url = full_url + 'INJECTX'
@@ -921,7 +921,7 @@ else:
                 print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto" + RESET)
                 f.write("P3 - MEDIUM, Open Redirect, " + str(redirect_url) + ", " + str(redirect_exploit) + "\n")
 
-        except:
+        except Exception as ex:
             pass
 
         new_url = full_url + 'INJECTX'
@@ -949,7 +949,7 @@ else:
                 print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto" + RESET)
                 f.write("P3 - MEDIUM, Open Redirect, " + str(redirect_url) + ", " + str(redirect_exploit) + "\n")
 
-        except:
+        except Exception as ex:
             pass
 
         new_url = full_url + 'INJECTX'
@@ -977,7 +977,7 @@ else:
                 print(OKGREEN + "[c] Exploit Command: curl -s -I '" + redirect_url + "' | egrep location --color=auto" + RESET)
                 f.write("P3 - MEDIUM, Open Redirect, " + str(redirect_url) + ", " + str(redirect_exploit) + "\n")
 
-        except:
+        except Exception as ex:
             pass
 
         new_url = full_url + 'INJECTX'
@@ -1003,7 +1003,7 @@ else:
                 print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
                 print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto" + RESET)
                 f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
-        except:
+        except Exception as ex:
             pass
 
         new_url = full_url + 'INJECTX'
@@ -1029,7 +1029,7 @@ else:
                 print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
                 print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto" + RESET)
                 f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
-        except:
+        except Exception as ex:
             pass
 
 
@@ -1058,9 +1058,9 @@ else:
                     print(OKRED + "[+] Vulnerable URL: " + traversal_url + RESET)
                     print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep Windows --color=auto" + RESET)
                     f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
-            except:
+            except Exception as ex:
                 pass
-        except:
+        except Exception as ex:
             pass
 
         # Linux Directory Traversal ######################################################################################
@@ -1085,7 +1085,7 @@ else:
                 print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep root --color=auto" + RESET)
                 f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
 
-        except:
+        except Exception as ex:
             pass
 
         new_url = full_url + 'INJECTX'
@@ -1114,7 +1114,7 @@ else:
                 print(OKGREEN + "[c] Exploit Command: curl -s '" + traversal_url + "' | egrep root --color=auto") + RESET
                 f.write("P2 - HIGH, Directory Traversal, " + str(traversal_url) + ", " + str(traversal_exploit) + "\n")
 
-        except:
+        except Exception as ex:
             pass
 
 print(OKORANGE + "______________________________________________________________________________________________________" + RESET)
