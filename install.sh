@@ -33,6 +33,6 @@ cp -f $PWD/blackwidow /usr/bin/blackwidow
 cp -f $PWD/injectx.py /usr/bin/injectx.py
 cp -f $PWD/blackwidow.desktop /usr/share/applications/ 2> /dev/null
 cp -f $PWD/blackwidow.desktop /usr/share/applications/blackwidow.desktop 2> /dev/null
-cp -f $PWD/blackwidow.desktop /usr/share/kali-menu/applications/blackwidow.desktop2> /dev/null
+cp -f $PWD/blackwidow.desktop /usr/share/kali-menu/applications/blackwidow.desktop 2> /dev/null
 echo -e "$OKBLUE[*]$RESET Done! $RESET"
 echo -e "$OKRED[>]$RESET To run, type 'blackwidow'! $RESET"
