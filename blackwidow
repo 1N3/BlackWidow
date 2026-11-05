@@ -6,7 +6,6 @@
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 import requests, sys, os, atexit, optparse
-from http import cookies
 
 requests.packages.urllib3.disable_warnings()
 
@@ -129,14 +128,14 @@ def logo():
   print (OKRED + "")
   print (OKRED + "                _.._")
   print (OKRED + "              .'    '.")
-  print (OKRED + "             /   __   \ ")
+  print (OKRED + "             /   __   \\ ")
   print (OKRED + "          ,  |   ><   |  ,")
-  print (OKRED + "         . \  \      /  / .")
-  print (OKRED + "          \_'--`(  )'--'_/")
-  print (OKRED + "            .--'/()\'--.")
-  print (OKRED + "@xer0dayz  /  /` '' `\  \ ")
+  print (OKRED + "         . \\  \\      /  / .")
+  print (OKRED + "          \\_'--`(  )'--'_/")
+  print (OKRED + "            .--'/()\\'--.")
+  print (OKRED + "@xer0dayz  /  /` '' `\\  \\ ")
   print (OKRED + "             |        |")
-  print (OKRED + "              \      /")
+  print (OKRED + "              \\      /")
   print (OKRED + "")
   print (RESET)
   print (OKORANGE + " + -- --=[ https://sn1persecurity.com" + RESET)
